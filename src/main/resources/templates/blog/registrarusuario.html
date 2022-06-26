@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+    <title>Cadastra-se</title>
+    <style>
+        .mensagem {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Cadastre-se</h1>
+        <p>É rápido e fácil.</p>
+        <span th:text="${mensagem}"></span>
+        <form action="#" th:action="@{/usuario/salvar}" th:object="${usuario}" method="post">
+            <input type="text" required="required" th:field="*{username}" placeholder="Digite seu nome de usuário">
+            <span class="mensagem" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            <input type="email" required="required" th:field="*{email}" placeholder="Digite seu email">
+            <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            <input type="password" required="required" th:field="*{password}" placeholder="Digite sua senha">
+            <span class="mensagem" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            <button type="submit">Cadastre-se</button>
+            <button type="button"><a th:href="@{/}">Voltar</a></button>
+        </form>
+    </div>
+    <div th:replace="fragments/fragments :: footer"></div>
+</body>
+
+</html>

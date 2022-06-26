@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+    <title>Fragmentos</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <div>
+            <a href="inicio.html" th:href="@{/inicio}">Início</a>
+            <a href="jogos.html" th:href="@{/jogos}">Games</a>
+            <a href="sobre.html" th:href="@{/sobre}">Sobre</a>
+            <a href="contato.html" th:href="@{/contato}">Contato</a>
+            <a href="login.html" th:href="@{/}">Sair</a>
+        </div>
+        <div>
+            <a href="https://facebook.com/davidmateusreis" target="_blank"><img src="imgs/facebook.png" alt="Facebook"></a>
+            <a href="https://linkedin.com/davidmateusreis" target="_blank"><img src="imgs/linkedin.png" alt="LinkedIn"></a>
+            <a href="https://instagram.com/davidmateusreis" target="_blank"><img src="imgs/instagram.png" alt="Instagram"></a>
+            <a href="https://youtube.com/davidmateusreis" target="_blank"><img src="imgs/youtube.png" alt="YouTube"></a>
+            <a href="https://twitter.com/davidmateusreis" target="_blank"><img src="imgs/twitter.png" alt="Twitter"></a>
+        </div>
+    </header>
+    <footer th:fragment="footer">
+        <div>
+            <span>&copy;2022 <a href="https://github.com/davidmateusreis" target="_blank">David</a></span>
+        </div>
+    </footer>
