@@ -30,9 +30,11 @@
                     <tr th:each="usuario : ${usuarios}">
                         <td><span th:text="${usuario.username}">Nome de Usuário</span></td>
                         <td><span th:text="${usuario.email}">Email</span></td>
-                        <td><a th:href="@{/usuario/admin/apagar/{id}(id=${usuario.id})}" 
-                            th:data-confirm-delete="|Você gostaria de apagar ${usuario.username}?|" 
-                            onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Apagar</a>
+                        <td>
+                            <a th:href="@{/usuario/admin/apagar/{id}(id=${usuario.id})}"
+                                th:data-confirm-delete="|Você gostaria de apagar ${usuario.username}?|"
+                                onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Apagar</a>
+                            <a th:href="@{/usuario/editar/{id}(id=${usuario.id})}">Editar</a>
                         </td>
                     </tr>
                 </tbody>

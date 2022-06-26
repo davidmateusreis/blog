@@ -1,5 +1,7 @@
 package com.david.blog.controllers;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,26 @@ public class UsuarioController {
 	    return "redirect:/usuario/admin/listar";
 	}
 
+	@GetMapping("/editar/{id}")
+	public String editarUsuario(@PathVariable("id") long id, Model model) {
+		Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
+		if (!usuarioExistente.isPresent()) {
+            throw new IllegalArgumentException("Usuário inválido:" + id);
+        } 
+		Usuario usuario = usuarioExistente.get();
+	    model.addAttribute("usuario", usuario);
+	    return "/auth/user/user-alterar-usuario";
+	}
+	
+	@PostMapping("/editar/{id}")
+	public String editarUsuario(@PathVariable("id") long id, 
+			@Valid Usuario usuario, BindingResult result) {
+		if (result.hasErrors()) {
+	    	usuario.setId(id);
+	        return "/auth/user/user-alterar-usuario";
+	    }
+	    usuarioRepository.save(usuario);
+	    return "redirect:/usuario/admin/listar";
+	}
 
 }
