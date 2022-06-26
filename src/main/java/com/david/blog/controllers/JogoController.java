@@ -38,7 +38,7 @@ public class JogoController {
 		}	
 		jogoRepository.save(jogo);
 		attributes.addFlashAttribute("mensagem", "Jogo salvo com sucesso!");
-		return "redirect:/";
+		return "redirect:/auth/admin/admin-listar-jogos";
 	}
 
 	@RequestMapping("/admin/listar")

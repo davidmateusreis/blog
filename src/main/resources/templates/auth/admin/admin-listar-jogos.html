@@ -32,7 +32,7 @@
                     </tr>
                     <tr th:each="jogo : ${jogos}">
                         <td><span th:text="${jogo.titulo}">Título</span></td>
-                        <td><span th:text="${jogo.dataDeLancamento}">Data de Lançamento</span></td>
+                        <td><span th:text="${#dates.format(jogo.dataDeLancamento, 'dd/MM/yyyy')}">Data de Lançamento</span></td>
                         <td><span th:text="${jogo.desenvolvedor}">Desenvolvedor</span></td>
                         <td><span th:text="${jogo.genero}">Gênero</span></td>
                         <td><span th:text="${jogo.regiao}">Região</span></td>
@@ -45,6 +45,7 @@
                     </tr>
                 </tbody>
             </table>
+            <a th:href="@{/jogo/novo}">Adicionar</a>
         </div>
     </div>
     <div th:replace="fragments/fragments :: footer"></div>
