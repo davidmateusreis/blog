@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,4 +38,19 @@ public class UsuarioController {
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 		return "redirect:/";
 	}
+
+	@RequestMapping("/admin/listar")
+	public String listarUsuario(Model model) {
+		model.addAttribute("usuarios", usuarioRepository.findAll());		
+		return "/auth/admin/admin-listar-usuarios";
+	}
+
+	@GetMapping("/admin/apagar/{id}")
+	public String deleteUser(@PathVariable("id") long id, Model model) {
+		Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id inválido:" + id));
+		usuarioRepository.delete(usuario);
+	    return "redirect:/usuario/admin/listar";
+	}
+
+
 }
