@@ -12,36 +12,38 @@
 
 <body>
     <div th:replace="fragments/fragments :: header"></div>
-    <div class="cont-usuarios">
-        <div class="usuarios">
-            <h2>Lista de Usuários</h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Nome de Usuário</th>
-                        <th>Email</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:if="${usuarios.empty}">
-                        <td colspan="2">Sem usuários</td>
-                    </tr>
-                    <tr th:each="usuario : ${usuarios}">
-                        <td><span th:text="${usuario.username}">Nome de Usuário</span></td>
-                        <td><span th:text="${usuario.email}">Email</span></td>
-                        <td>
-                            <a th:href="@{/usuario/admin/apagar/{id}(id=${usuario.id})}"
-                                th:data-confirm-delete="|Você gostaria de apagar ${usuario.username}?|"
-                                onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Apagar</a>
-                            <a th:href="@{/usuario/editar/{id}(id=${usuario.id})}">Editar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button><a th:href="@{/usuario/novo}">Cadastrar</a></button>
+    <section>
+        <div class="cont-usuarios">
+            <div class="usuarios">
+                <h2>Lista de usuários</h2>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Nome de Usuário</th>
+                            <th>Email</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${usuarios.empty}">
+                            <td colspan="2">Sem usuários</td>
+                        </tr>
+                        <tr th:each="usuario : ${usuarios}">
+                            <td><span th:text="${usuario.username}">Nome de Usuário</span></td>
+                            <td><span th:text="${usuario.email}">Email</span></td>
+                            <td>
+                                <a th:href="@{/usuario/admin/apagar/{id}(id=${usuario.id})}"
+                                    th:data-confirm-delete="|Você gostaria de apagar ${usuario.username}?|"
+                                    onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">Apagar</a>
+                                <a th:href="@{/usuario/editar/{id}(id=${usuario.id})}">Editar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button><a th:href="@{/usuario/novo}">Cadastrar</a></button>
+            </div>
         </div>
-    </div>
+    </section>
     <div th:replace="fragments/fragments :: footer"></div>
 </body>
 

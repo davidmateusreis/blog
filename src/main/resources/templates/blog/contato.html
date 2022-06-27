@@ -12,17 +12,16 @@
     <div th:replace="fragments/fragments :: header"></div>
     <section>
         <div class="cont-contato">
-            <div class="contato">
+            <div class="contato-left">
                 <h2>Entre em contato</h2>
             </div>
-            <div class="contato">
+            <div class="contato-right">
                 <form class="form-cad" action="https://formsubmit.co/davidmateusreis@gmail.com" method="post">
-                    <input type="text" name="name" id="nome" placeholder="Insira seu nome" required>
-                    <input type="email" name="email" id="email" placeholder="Insira seu email" required>
-                    <input type="text" name="assunto" id="assunto" placeholder="Insira o assunto">
+                    <input type="text" name="name" id="nome" placeholder="Digite seu nome" required>
+                    <input type="email" name="email" id="email" placeholder="Digite seu email" required>
+                    <input type="text" name="assunto" id="assunto" placeholder="Digite o assunto">
                     <textarea name="mensagem" id="mensagem" cols="60" rows="10" placeholder="Digite sua mensagem aqui"></textarea>
-                    <input type="hidden" name="_next" value="https://davidmateusreis.github.io/projeto-portfolio/obrigado.html">
-                    <button type="submit" class="botao" id="botao">Enviar</button>
+                    <button type="submit"><a th:href="@{/obrigado}"></a>Enviar</button>
                </form>
             </div>
             </div>

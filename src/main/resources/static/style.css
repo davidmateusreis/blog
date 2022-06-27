@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +10,8 @@
 
 body {
     background-color: #f1f1f1;
-    font-family: Segoe UI, 'Tahoma', Geneva, Verdana, sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: normal;
 }
 
 body a {
@@ -18,14 +21,22 @@ body a {
 
 body h1 {
     font-size: 4em;
+    padding: 1%;
 }
 
 body h2 {
     font-size: 3em;
+    padding: 1%;
 }
 
-div {
-    border: solid 1px red;
+body h3 {
+    font-size: 1.2em;
+    padding: 1%;
+}
+
+body p {
+    font-size: 1em;
+    padding: 1%;
 }
 
 button {
@@ -34,7 +45,8 @@ button {
     height: 47px;
     width: 470px;
     font-size: 1em;
-    margin-top: 1%;
+    font-family: 'IBM Plex Sans';
+    margin-top: 2%;
     border: 1px solid transparent;
     cursor: pointer;
     transition: 0.2s;
@@ -55,33 +67,39 @@ table {
     width: 100%;
 }
 
+td,
+th {
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(218, 218, 218);
+}
+
 .form-cad input {
-    display: flex;
-    flex-direction: column;
     background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
     padding: 2% 0% 0% 1%;
-    width: 100%;
-    height: 40px;
-    font-family: 'Tahoma';
+    width: 470px;
+    height: 47px;
+    font-family: 'IBM Plex Sans';
     font-size: 1em;
 }
+
 .form-cad textarea {
-    display: flex;
-    flex-direction: column;
     background: transparent;
     border: none;
     resize: none;
     border-bottom: 1px solid #000000;
-    width: 100%;
+    width: 470px;
     padding: 2% 0% 0% 1%;
-    font-family: 'Tahoma';
+    font-family: 'IBM Plex Sans';
     font-size: 1em;
-    
 }
 
-input,
+.form-cad input,
 textarea:focus {
     outline: none;
 }
@@ -111,18 +129,20 @@ textarea:focus {
 .cont-inicio {
     display: flex;
     flex-direction: row;
-    gap: 2%;
+    justify-content: center;
+    gap: 1%;
     margin: 2%;
     padding: 1%;
     height: 690px;
 }
+
 .inicio-left {
-    width: 50%;
+    width: 30%;
     padding: 1%;
 }
 
 .inicio-right {
-    width: 50%;
+    width: 30%;
     padding: 1%;
 }
 
@@ -134,11 +154,12 @@ textarea:focus {
     display: flex;
     margin: 2%;
     padding: 1%;
-    height: 690px;    
+    height: 690px;
 }
 
 .jogos {
     margin: auto;
+    margin-top: 4%;
     width: 70%;
     text-align: center;
     padding: 2%;
@@ -149,7 +170,7 @@ textarea:focus {
     flex-direction: column;
     margin: 2%;
     padding: 1%;
-    height: 690px;  
+    height: 690px;
 }
 
 .sobre-top {
@@ -160,17 +181,19 @@ textarea:focus {
     margin: auto;
     text-align: center;
     padding: 2%;
+    width: 50%;
 }
 
 .cont-usuarios {
     display: flex;
     margin: 2%;
     padding: 1%;
-    height: 690px;    
+    height: 690px;
 }
 
 .usuarios {
     margin: auto;
+    margin-top: 4%;
     width: 70%;
     text-align: center;
     padding: 2%;
@@ -178,25 +201,64 @@ textarea:focus {
 
 .cont-contato {
     display: flex;
+    flex-direction: row;
+    gap: 2%;
     margin: 2%;
     padding: 1%;
-    height: 690px;    
+    height: 690px;
 }
 
-.contato {
+.contato-left {
+    width: 50%;
     margin: auto;
+    margin-top: 4%;
     padding: 2%;
+    text-align: center;
+}
+
+.contato-right {
+    width: 50%;
+    margin: auto;
+    margin-top: 4%;
+    padding: 2%;
+}
+
+.cont-curriculo {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;
+}
+
+.curriculo-left {
+    width: 20%;
+    margin: auto;
+    margin-top: 4%;
+    padding: 2%;
+    text-align: center;
+    height: 480px;
+}
+
+.curriculo-right {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10%;
+    padding: 2%;
+    height: 480px;
 }
 
 .cont-login {
     display: flex;
     margin: 2%;
     padding: 1%;
-    height: 690px;    
+    height: 690px;
 }
 
 .login {
     margin: auto;
+    margin-top: 4%;
     text-align: center;
     padding: 2%;
 }
@@ -206,11 +268,12 @@ textarea:focus {
     text-align: center;
     margin: 2%;
     padding: 1%;
-    height: 690px;    
+    height: 690px;
 }
 
 .cad-usuario {
     margin: auto;
+    margin-top: 4%;
     padding: 2%;
 }
 
@@ -219,11 +282,12 @@ textarea:focus {
     text-align: center;
     margin: 2%;
     padding: 1%;
-    height: 690px;    
+    height: 690px;
 }
 
 .cad-jogo {
     margin: auto;
+    margin-top: 4%;
     padding: 2%;
 }
 
@@ -231,11 +295,14 @@ textarea:focus {
     display: flex;
     margin: 2%;
     padding: 1%;
-    height: 690px;  
+    height: 690px;
 }
 
 .obrigado {
+    width: 100%;
     margin: auto;
+    margin-top: 4%;
+    text-align: center;
 }
 
 .foot {
@@ -245,17 +312,17 @@ textarea:focus {
 }
 
 ::-webkit-input-placeholder {
-    font-family: 'Tahoma';
+    font-family: 'IBM Plex Sans';
 }
 
 :-moz-placeholder {
-    font-family: 'Tahoma';
+    font-family: 'IBM Plex Sans';
 }
 
 ::-moz-placeholder {
-    font-family: 'Tahoma';
+    font-family: 'IBM Plex Sans';
 }
 
 :-ms-input-placeholder {
-    font-family: 'Tahoma';
+    font-family: 'IBM Plex Sans';
 }

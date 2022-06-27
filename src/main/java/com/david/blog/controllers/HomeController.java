@@ -25,6 +25,10 @@ public class HomeController {
     public String contact() {
         return "blog/contato";
     }
+    @RequestMapping("/curriculo")
+    public String curriculum() {
+        return "blog/curriculo";
+    }
 
     @RequestMapping("/obrigado")
     public String obrigado() {
