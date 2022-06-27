@@ -10,24 +10,26 @@
 </head>
 <body>
     <header th:fragment="header">
-        <div>
-            <a th:href="@{/inicio}">Início</a>
-            <a th:href="@{/jogo/admin/listar}">Games</a>
-            <a th:href="@{/sobre}">Sobre</a>
-            <a th:href="@{/contato}">Contato</a>
-            <a th:href="@{/usuario/admin/listar}">Usuários</a>
-            <a th:href="@{/}">Sair</a>
-        </div>
-        <div>
-            <a href="https://facebook.com/davidmateusreis" target="_blank"><img src="/imgs/facebook.png" alt="Facebook"></a>
-            <a href="https://linkedin.com/davidmateusreis" target="_blank"><img src="/imgs/linkedin.png" alt="LinkedIn"></a>
-            <a href="https://instagram.com/davidmateusreis" target="_blank"><img src="/imgs/instagram.png" alt="Instagram"></a>
-            <a href="https://youtube.com/davidmateusreis" target="_blank"><img src="/imgs/youtube.png" alt="YouTube"></a>
-            <a href="https://twitter.com/davidmateusreis" target="_blank"><img src="/imgs/twitter.png" alt="Twitter"></a>
+        <div class="cont-nav">
+            <div class="nav-left">
+                <a th:href="@{/inicio}">Início</a>
+                <a th:href="@{/jogo/admin/listar}">Games</a>
+                <a th:href="@{/sobre}">Sobre</a>
+                <a th:href="@{/contato}">Contato</a>
+                <a th:href="@{/usuario/admin/listar}">Usuários</a>
+                <a th:href="@{/}">Sair</a>
+            </div>
+            <div class="nav-right">
+                <a href="https://facebook.com/davidmateusreis" target="_blank"><img src="/imgs/facebook.png" alt="Facebook"></a>
+                <a href="https://linkedin.com/davidmateusreis" target="_blank"><img src="/imgs/linkedin.png" alt="LinkedIn"></a>
+                <a href="https://instagram.com/davidmateusreis" target="_blank"><img src="/imgs/instagram.png" alt="Instagram"></a>
+                <a href="https://youtube.com/davidmateusreis" target="_blank"><img src="/imgs/youtube.png" alt="YouTube"></a>
+                <a href="https://twitter.com/davidmateusreis" target="_blank"><img src="/imgs/twitter.png" alt="Twitter"></a>
+            </div>
         </div>
     </header>
     <footer th:fragment="footer">
-        <div>
+        <div class="foot">
             <span>&copy;2022 <a href="https://github.com/davidmateusreis" target="_blank">David</a></span>
         </div>
     </footer>

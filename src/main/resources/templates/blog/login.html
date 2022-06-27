@@ -11,19 +11,24 @@
 </head>
 
 <body>
-    <div>
-        <h1>Bem-vindo de volta!</h1>
-		<span th:text="${mensagem}"></span>
-        <form action="" method="" th:object="${usuario}">
-            <input type="text" :field="*{username}" placeholder="Digite seu nome de usuário">
-            <input type="password" :field="*{password}" placeholder="Digite sua senha">
-            <div>
-                <p>Não tem cadastro? <a href="/usuario/novo">Clique aqui!</a></p>
+    <div class="cont-login">
+        <div class="login">
+            <h2>Bem-vindo de volta!</h2>
+                <span th:text="${mensagem}"></span>
+            <form class="form-cad" action="" method="" th:object="${usuario}">
+                <input type="text" :field="*{username}" placeholder="Digite seu nome de usuário">
+                <input type="password" :field="*{password}" placeholder="Digite sua senha">
+                <div>
+                    <p>Não tem cadastro? <a href="/usuario/novo">Clique aqui!</a></p>
+                </div>
+                
+                <button type="submit">Entrar</button>
+            </form>
+            <div class="login">
+                <input type="checkbox">
+                <label>Lembrar-me</label>
             </div>
-            <button type="submit">Entrar</button>
-        </form>
-        <input type="checkbox" class="" id="">
-        <label>Lembrar-me</label>
+        </div>
     </div>
     <div th:replace="fragments/fragments :: footer"></div>
 </body>

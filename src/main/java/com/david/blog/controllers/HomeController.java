@@ -16,11 +16,6 @@ public class HomeController {
         return "blog/inicio";
     }
 
-    @RequestMapping("/jogos")
-    public String games() {
-        return "blog/jogos";
-    }
-
     @RequestMapping("/sobre")
     public String about() {
         return "blog/sobre";
@@ -29,5 +24,10 @@ public class HomeController {
     @RequestMapping("/contato")
     public String contact() {
         return "blog/contato";
+    }
+
+    @RequestMapping("/obrigado")
+    public String obrigado() {
+        return "blog/obrigado";
     }
 }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/imgs/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/style.css">
-    <title>Lista de Jogos</title>
+    <title>Adicionar Jogo</title>
     <style>
         .mensagem {
             color: red;
@@ -19,21 +19,22 @@
     <div th:replace="fragments/fragments :: header"></div>
     <div class="cont-cad-jogo">
         <div class="cad-jogo">
-            <h2>Alterar Jogo</h2>
-            <form class="form-cad" th:action="@{/jogo/editar/{id}(id=${jogo.id})}" th:object="${jogo}" method="post">
+            <h2>Adicione um jogo na lista</h2>
+            <span th:text="${mensagem}"></span>
+            <form class="form-cad" action="#" th:action="@{/jogo/salvar}" th:object="${jogo}" method="post">
                 <input type="text" required="required" th:field="*{titulo}" placeholder="Título">
                 <span class="mensagem" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span>
                 <input type="text" required="required" th:field="*{dataDeLancamento}" placeholder="Data de Lançamento">
                 <span class="mensagem" th:if="${#fields.hasErrors('dataDeLancamento')}"
                     th:errors="*{dataDeLancamento}"></span>
                 <input type="text" required="required" th:field="*{desenvolvedor}" placeholder="Desenvolvedor">
-                <span class="mensagem" th:if="${#fields.hasErrors('desenvolvedor')}"
-                    th:errors="*{desenvolvedor}"></span>
+                <span class="mensagem" th:if="${#fields.hasErrors('desenvolvedor')}" th:errors="*{desenvolvedor}"></span>
                 <input type="text" required="required" th:field="*{genero}" placeholder="Gênero">
                 <span class="mensagem" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></span>
                 <input type="text" required="required" th:field="*{regiao}" placeholder="Região">
                 <span class="mensagem" th:if="${#fields.hasErrors('regiao')}" th:errors="*{regiao}"></span>
-                <button type="submit">Alterar</button>
+                <button type="submit">Adicionar</button>
+                <button type="button"><a th:href="@{/jogo/admin/listar}">Voltar</a></button>
             </form>
         </div>
     </div>

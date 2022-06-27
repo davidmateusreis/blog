@@ -12,9 +12,9 @@
 
 <body>
     <div th:replace="fragments/fragments :: header"></div>
-    <div>
-        <div>
-            <h1>Lista de Usuários</h1>
+    <div class="cont-usuarios">
+        <div class="usuarios">
+            <h2>Lista de Usuários</h2>
             <table border="1">
                 <thead>
                     <tr>
@@ -39,6 +39,7 @@
                     </tr>
                 </tbody>
             </table>
+            <button><a th:href="@{/usuario/novo}">Cadastrar</a></button>
         </div>
     </div>
     <div th:replace="fragments/fragments :: footer"></div>

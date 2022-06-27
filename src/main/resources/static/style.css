@@ -3,6 +3,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -13,4 +14,248 @@ body {
 body a {
     text-decoration: none;
     color: inherit;
+}
+
+body h1 {
+    font-size: 4em;
+}
+
+body h2 {
+    font-size: 3em;
+}
+
+div {
+    border: solid 1px red;
+}
+
+button {
+    color: #f1f1f1;
+    background-color: black;
+    height: 47px;
+    width: 470px;
+    font-size: 1em;
+    margin-top: 1%;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.384);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    margin-top: 1%;
+    width: 100%;
+}
+
+.form-cad input {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    padding: 2% 0% 0% 1%;
+    width: 100%;
+    height: 40px;
+    font-family: 'Tahoma';
+    font-size: 1em;
+}
+.form-cad textarea {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    border: none;
+    resize: none;
+    border-bottom: 1px solid #000000;
+    width: 100%;
+    padding: 2% 0% 0% 1%;
+    font-family: 'Tahoma';
+    font-size: 1em;
+    
+}
+
+input,
+textarea:focus {
+    outline: none;
+}
+
+.form-cad button:hover {
+    background-color: rgba(0, 0, 0, 0.384);
+}
+
+.cont-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    margin: 0% 2% 0% 2%;
+    padding: 1%;
+}
+
+.nav-left {
+    width: 50%;
+    text-align: left;
+}
+
+.nav-right {
+    width: 50%;
+    text-align: right;
+}
+
+.cont-inicio {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;
+}
+.inicio-left {
+    width: 50%;
+    padding: 1%;
+}
+
+.inicio-right {
+    width: 50%;
+    padding: 1%;
+}
+
+.inicio-right img {
+    box-shadow: 12px 12px;
+}
+
+.cont-jogos {
+    display: flex;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;    
+}
+
+.jogos {
+    margin: auto;
+    width: 70%;
+    text-align: center;
+    padding: 2%;
+}
+
+.cont-sobre {
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;  
+}
+
+.sobre-top {
+    margin: auto;
+}
+
+.sobre-bottom {
+    margin: auto;
+    text-align: center;
+    padding: 2%;
+}
+
+.cont-usuarios {
+    display: flex;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;    
+}
+
+.usuarios {
+    margin: auto;
+    width: 70%;
+    text-align: center;
+    padding: 2%;
+}
+
+.cont-contato {
+    display: flex;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;    
+}
+
+.contato {
+    margin: auto;
+    padding: 2%;
+}
+
+.cont-login {
+    display: flex;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;    
+}
+
+.login {
+    margin: auto;
+    text-align: center;
+    padding: 2%;
+}
+
+.cont-cad-usuario {
+    display: flex;
+    text-align: center;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;    
+}
+
+.cad-usuario {
+    margin: auto;
+    padding: 2%;
+}
+
+.cont-cad-jogo {
+    display: flex;
+    text-align: center;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;    
+}
+
+.cad-jogo {
+    margin: auto;
+    padding: 2%;
+}
+
+.cont-obrigado {
+    display: flex;
+    margin: 2%;
+    padding: 1%;
+    height: 690px;  
+}
+
+.obrigado {
+    margin: auto;
+}
+
+.foot {
+    margin: 2%;
+    padding: 1%;
+    text-align: center;
+}
+
+::-webkit-input-placeholder {
+    font-family: 'Tahoma';
+}
+
+:-moz-placeholder {
+    font-family: 'Tahoma';
+}
+
+::-moz-placeholder {
+    font-family: 'Tahoma';
+}
+
+:-ms-input-placeholder {
+    font-family: 'Tahoma';
 }

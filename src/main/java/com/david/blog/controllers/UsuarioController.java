@@ -27,14 +27,14 @@ public class UsuarioController {
 	@GetMapping("/novo")
 	public String adicionarUsuario(Model model) {
 		model.addAttribute("usuario", new Usuario());
-		return "blog/registrarusuario";
+		return "blog/registrar-usuario";
 	}
 	
 	@PostMapping("/salvar")
 	public String salvarUsuario(@Valid Usuario usuario, BindingResult result, 
 				RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return "blog/registrarusuario";
+			return "blog/registrar-usuario";
 		}	
 		usuarioRepository.save(usuario);
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");

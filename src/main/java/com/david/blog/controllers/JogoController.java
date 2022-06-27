@@ -27,18 +27,18 @@ public class JogoController {
 	@GetMapping("/novo")
 	public String adicionarJogo(Model model) {
 		model.addAttribute("jogo", new Jogo());
-		return "blog/registrarjogo";
+		return "blog/registrar-jogo";
 	}
 	
 	@PostMapping("/salvar")
 	public String salvarJogo(@Valid Jogo jogo, BindingResult result, 
 				RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return "blog/registrarjogo";
+			return "blog/registrar-jogo";
 		}	
 		jogoRepository.save(jogo);
 		attributes.addFlashAttribute("mensagem", "Jogo salvo com sucesso!");
-		return "redirect:/auth/admin/admin-listar-jogos";
+		return "redirect:/jogo/admin/listar";
 	}
 
 	@RequestMapping("/admin/listar")

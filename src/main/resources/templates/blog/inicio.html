@@ -12,17 +12,19 @@
 
 <body>
     <div th:replace="fragments/fragments :: header"></div>
-        <div>
-            <h1>Olá, eu sou o David.</h1>
-            <h2>Bem-vindo ao meu portfólio!</h2>
-            <p>Convido você a explorar o meu site para entender as minhas especialidades, técnicas e experiências
-                profissionais. Divirta-se navegando e entre em contato se tiver alguma pergunta.</p>
-        </div>
-        <div>
-            <picture>
-                <source media="(min-width: 600px)" srcset="imgs/myself.jpg">
-                <img src="imgs/myself.jpg" alt="Myself">
-            </picture>
+        <div class="cont-inicio">
+            <div class="inicio-left">
+                <h1>Olá, eu sou o David.</h1>
+                <h2>Bem-vindo ao meu portfólio!</h2>
+                <p>Convido você a explorar o meu site para entender as minhas especialidades, técnicas e experiências
+                    profissionais. Divirta-se navegando e entre em contato se tiver alguma pergunta.</p>
+            </div>
+            <div class="inicio-right">
+                <picture>
+                    <source media="(min-width: 600px)" srcset="imgs/myself.jpg">
+                    <img src="imgs/myself.jpg" alt="Myself">
+                </picture>
+            </div>
         </div>
     <div th:replace="fragments/fragments :: footer"></div>
 </body>
