@@ -40,6 +40,8 @@ public class Usuario {
 			   inverseJoinColumns = @JoinColumn(name = "papel_id"))
     private List<Papel> papeis;
 
+    private boolean ativo;
+
     public Long getId() {
         return id;
     }
@@ -78,6 +80,14 @@ public class Usuario {
 
     public void setPapeis(List<Papel> papeis) {
         this.papeis = papeis;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
 }

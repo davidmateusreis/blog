@@ -8,17 +8,21 @@
     <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Login</title>
+    <style>
+        .mensagem {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
     <div class="cont-login">
         <div class="login">
             <h2>Bem-vindo de volta!</h2>
-            <p>Mas antes, preciso checar suas credenciais.</p>
             <span th:text="${mensagem}"></span>
-            <form class="form-cad" action="" method="" th:object="${usuario}">
-                <input type="text" :field="*{username}" placeholder="Digite seu nome de usuário">
-                <input type="password" :field="*{password}" placeholder="Digite sua senha">
+            <form class="form-cad" action="#" method="post">
+                <input type="text" placeholder="Digite seu nome de usuário">
+                <input type="text" placeholder="Digite sua senha">
                 <div class="login">
                     <span>Não tem cadastro? <a href="/usuario/novo">Clique aqui!</a></span>
                 </div>

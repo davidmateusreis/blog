@@ -21,6 +21,8 @@
                         <tr>
                             <th>Nome de Usuário</th>
                             <th>Email</th>
+                            <th>Status</th>
+                            <th>Papel</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -31,6 +33,14 @@
                         <tr th:each="usuario : ${usuarios}">
                             <td><span th:text="${usuario.username}">Nome de Usuário</span></td>
                             <td><span th:text="${usuario.email}">Email</span></td>
+                            <td>
+                                <span th:text="${usuario.ativo} ? 'ATIVO' : 'NÃO ATIVO'">Ativo?</span>
+                            </td>            
+                            <td>
+                                <th:block th:each="pp : ${usuario.papeis}">
+                                    <span th:text="${pp.papel}">Papel</span><br/>
+                                </th:block>							
+                            </td>            
                             <td>
                                 <a th:href="@{/usuario/admin/apagar/{id}(id=${usuario.id})}"
                                     th:data-confirm-delete="|Você gostaria de apagar ${usuario.username}?|"
