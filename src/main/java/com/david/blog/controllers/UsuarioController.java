@@ -1,5 +1,7 @@
 package com.david.blog.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.david.blog.models.Papel;
 import com.david.blog.models.Usuario;
+import com.david.blog.repositories.PapelRepository;
 import com.david.blog.repositories.UsuarioRepository;
 
 @Controller
@@ -23,6 +27,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private PapelRepository papelRepository;
 	
 	@GetMapping("/novo")
 	public String adicionarUsuario(Model model) {
@@ -32,10 +39,22 @@ public class UsuarioController {
 	
 	@PostMapping("/salvar")
 	public String salvarUsuario(@Valid Usuario usuario, BindingResult result, 
-				RedirectAttributes attributes) {
+				Model model, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return "blog/registrar-usuario";
-		}	
+		}
+		
+		Usuario usr = usuarioRepository.findByUsername(usuario.getUsername());
+		if (usr != null) {
+			model.addAttribute("loginExiste", "Login já existe cadastrado");
+			return "blog/registrar-usuario";
+		}
+		
+		Papel papel = papelRepository.findByPapel("USER");
+		List<Papel> papeis = new ArrayList<Papel>();
+		papeis.add(papel);				
+		usuario.setPapeis(papeis);
+		
 		usuarioRepository.save(usuario);
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
 		return "redirect:/";
@@ -74,6 +93,20 @@ public class UsuarioController {
 	    }
 	    usuarioRepository.save(usuario);
 	    return "redirect:/usuario/admin/listar";
+	}
+
+	@GetMapping("/editarPapel/{id}")
+	public String selecionarPapel(@PathVariable("id") long id, Model model) {
+		Optional<Usuario> usuarioVelho = usuarioRepository.findById(id);
+		if (!usuarioVelho.isPresent()) {
+            throw new IllegalArgumentException("Usuário inválido:" + id);
+        } 
+		Usuario usuario = usuarioVelho.get();
+	    model.addAttribute("usuario", usuario);
+	    
+	    model.addAttribute("listaPapeis", papelRepository.findAll());
+	    
+	    return "/auth/admin/admin-editar-papel-usuario";
 	}
 
 }

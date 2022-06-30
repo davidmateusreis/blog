@@ -6,4 +6,5 @@ import com.david.blog.models.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     
+    Usuario findByUsername(String username);
 }

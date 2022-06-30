@@ -1,9 +1,16 @@
 package com.david.blog.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,6 +33,12 @@ public class Usuario {
     @NotEmpty(message = "A senha deve ser informada")
 	@Size(min = 3, message = "A senha deve ter no mínimo 3 caracteres")
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="usuario_papel",
+			   joinColumns = @JoinColumn(name = "usuario_id"),
+			   inverseJoinColumns = @JoinColumn(name = "papel_id"))
+    private List<Papel> papeis;
 
     public Long getId() {
         return id;
@@ -57,6 +70,14 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Papel> getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(List<Papel> papeis) {
+        this.papeis = papeis;
     }
 
 }
