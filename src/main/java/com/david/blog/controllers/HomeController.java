@@ -7,31 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @RequestMapping("/")
-    public String login() {
-        return "blog/login";
+    public String acess() {
+        return "redirect:/login";
     }
 
-    @RequestMapping("/inicio")
-    public String index() {
-        return "blog/inicio";
-    }
-
-    @RequestMapping("/sobre")
-    public String about() {
-        return "blog/sobre";
-    }
-
-    @RequestMapping("/contato")
-    public String contact() {
-        return "blog/contato";
-    }
-    @RequestMapping("/curriculo")
-    public String curriculum() {
-        return "blog/curriculo";
-    }
-
-    @RequestMapping("/obrigado")
-    public String obrigado() {
-        return "blog/obrigado";
-    }
+    @RequestMapping("/login") 
+	public String login() {
+		return "login";
+	}
 }

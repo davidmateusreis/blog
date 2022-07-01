@@ -62,20 +62,20 @@ public class UsuarioController {
 	@GetMapping("/novo")
 	public String adicionarUsuario(Model model) {
 		model.addAttribute("usuario", new Usuario());
-		return "blog/registrar-usuario";
+		return "registrar-usuario";
 	}
 	
 	@PostMapping("/salvar")
 	public String salvarUsuario(@Valid Usuario usuario, BindingResult result, 
 				Model model, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return "blog/registrar-usuario";
+			return "registrar-usuario";
 		}
 		
 		Usuario usr = usuarioRepository.findByUsername(usuario.getUsername());
 		if (usr != null) {
 			model.addAttribute("loginExiste", "Login já existe cadastrado");
-			return "blog/registrar-usuario";
+			return "registrar-usuario";
 		}
 		
 		Papel papel = papelRepository.findByPapel("USER");
