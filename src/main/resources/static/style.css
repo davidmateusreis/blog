@@ -311,6 +311,13 @@ textarea:focus {
     text-align: center;
 }
 
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
+    accent-color: black;
+}
+
 ::-webkit-input-placeholder {
     font-family: 'IBM Plex Sans';
 }

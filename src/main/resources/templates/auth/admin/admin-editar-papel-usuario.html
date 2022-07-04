@@ -32,7 +32,7 @@
                         disabled>
                     <span class="mensagem" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 
-                    <div class="login">
+                    <div class="checkbox">
                         <label>Ativado:</label>
                         <input style="height:1em; width:1em;" type="radio" value="true" th:field="*{ativo}">
                         <label>Ativo</label>
@@ -40,7 +40,7 @@
                         <label>Não ativo</label>
                     </div>
 
-                    <div class="login">
+                    <div class="checkbox">
                         <label>Papéis:</label>
                         <th:block th:each="pp : ${listaPapeis}">
                             <div th:if="${#lists.contains(usuario.papeis, pp)}">

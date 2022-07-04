@@ -42,7 +42,6 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 		.antMatchers("/auth/user/*").hasAnyAuthority("USER","ADMIN")
 		.antMatchers("/auth/admin/*").hasAnyAuthority("ADMIN")
 		.antMatchers("/usuario/admin/*").hasAnyAuthority("ADMIN")
-		.antMatchers("/jogo/admin/*").hasAnyAuthority("ADMIN")
 		.and()
 		.exceptionHandling().accessDeniedPage("/auth/auth-acesso-negado")
 		.and()
