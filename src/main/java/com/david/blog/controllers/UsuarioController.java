@@ -43,9 +43,9 @@ public class UsuarioController {
 		
 		String redirectURL = "";
 		if (temAutorizacao(usuario, "ADMIN")) {
-            redirectURL = "/auth/admin/admin-inicio";
+            redirectURL = "auth/admin/admin-inicio";
         } else if (temAutorizacao(usuario, "USER")) {
-            redirectURL = "/auth/user/user-inicio";
+            redirectURL = "auth/user/user-inicio";
         }		
         return redirectURL;
 	}
