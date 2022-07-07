@@ -94,7 +94,7 @@ public class UsuarioController {
 	@RequestMapping("/admin/listar")
 	public String listarUsuario(Model model) {
 		model.addAttribute("usuarios", usuarioRepository.findAll());		
-		return "/auth/admin/admin-listar-usuarios";
+		return "auth/admin/admin-listar-usuarios";
 	}
 
 	@GetMapping("/admin/apagar/{id}")
@@ -112,7 +112,7 @@ public class UsuarioController {
         } 
 		Usuario usuario = usuarioExistente.get();
 	    model.addAttribute("usuario", usuario);
-	    return "/auth/user/user-alterar-usuario";
+	    return "auth/user/user-alterar-usuario";
 	}
 	
 	@PostMapping("/editar/{id}")
@@ -120,7 +120,7 @@ public class UsuarioController {
 			@Valid Usuario usuario, BindingResult result) {
 		if (result.hasErrors()) {
 	    	usuario.setId(id);
-	        return "/auth/user/user-alterar-usuario";
+	        return "auth/user/user-alterar-usuario";
 	    }
 	    usuarioRepository.save(usuario);
 	    return "redirect:/usuario/admin/listar";
@@ -137,7 +137,7 @@ public class UsuarioController {
 	    
 	    model.addAttribute("listaPapeis", papelRepository.findAll());
 	    
-	    return "/auth/admin/admin-editar-papel-usuario";
+	    return "auth/admin/admin-editar-papel-usuario";
 	}
 
 	@PostMapping("/editarPapel/{id}")
