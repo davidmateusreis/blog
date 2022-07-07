@@ -1,0 +1,15 @@
+com\david\blog\BlogApplication.class
+com\david\blog\controllers\UsuarioController.class
+com\david\blog\controllers\JogoController.class
+com\david\blog\repositories\JogoRepository.class
+com\david\blog\repositories\PapelRepository.class
+com\david\blog\security\SucessLogin.class
+com\david\blog\controllers\HomeController.class
+com\david\blog\components\CriarPapeis.class
+com\david\blog\security\DetalhesUsuarioServico.class
+com\david\blog\models\Usuario.class
+com\david\blog\components\ConfiguracaoVisao.class
+com\david\blog\models\Papel.class
+com\david\blog\models\Jogo.class
+com\david\blog\security\ConfiguracaoSeguranca.class
+com\david\blog\repositories\UsuarioRepository.class
