@@ -27,14 +27,14 @@ public class JogoController {
 	@GetMapping("/novo")
 	public String adicionarJogo(Model model) {
 		model.addAttribute("jogo", new Jogo());
-		return "/auth/admin/admin-registrar-jogo";
+		return "auth/admin/admin-registrar-jogo";
 	}
 	
 	@PostMapping("/salvar")
 	public String salvarJogo(@Valid Jogo jogo, BindingResult result, 
 				RedirectAttributes attributes) {
 		if (result.hasErrors()) {
-			return "/auth/admin/admin-registrar-jogo";
+			return "auth/admin/admin-registrar-jogo";
 		}	
 		jogoRepository.save(jogo);
 		attributes.addFlashAttribute("mensagem", "Jogo salvo com sucesso!");
@@ -44,7 +44,7 @@ public class JogoController {
 	@RequestMapping("/admin/listar")
 	public String listarJogo(Model model) {
 		model.addAttribute("jogos", jogoRepository.findAll());		
-		return "/auth/admin/admin-listar-jogos";
+		return "auth/admin/admin-listar-jogos";
 	}
 
 	@GetMapping("/admin/apagar/{id}")
@@ -62,7 +62,7 @@ public class JogoController {
         } 
 		Jogo jogo = jogoExistente.get();
 	    model.addAttribute("jogo", jogo);
-	    return "/auth/user/user-alterar-jogo";
+	    return "auth/user/user-alterar-jogo";
 	}
 	
 	@PostMapping("/editar/{id}")
@@ -70,7 +70,7 @@ public class JogoController {
 			@Valid Jogo jogo, BindingResult result) {
 		if (result.hasErrors()) {
 	    	jogo.setId(id);
-	        return "/auth/user/user-alterar-jogo";
+	        return "auth/user/user-alterar-jogo";
 	    }
 	    jogoRepository.save(jogo);
 	    return "redirect:/jogo/admin/listar";
