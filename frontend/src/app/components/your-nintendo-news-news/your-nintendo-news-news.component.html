@@ -1,0 +1,7 @@
+<div class="news-container">
+    <div *ngFor="let news of newsList" class="news-item">
+        <h2 class="news-title">{{ news.title }}</h2>
+        <div class="news-description" [innerHTML]="removeLastParagraph(news.description)"></div>
+        <a [href]="news.link" target="_blank" class="read-more-link">Read more</a>
+    </div>
+</div>

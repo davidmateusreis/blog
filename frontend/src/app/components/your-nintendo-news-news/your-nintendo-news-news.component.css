@@ -1,0 +1,31 @@
+.news-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+.news-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 1%;
+    width: 80%;
+    max-width: 800px;
+}
+
+.news-title {
+    color: #333;
+    font-size: 2em;
+}
+
+.news-description {
+    margin-top: 10px;
+}
+
+.read-more-link {
+    color: #0000ee;
+    text-decoration: none;
+    display: block;
+    margin-top: 1%;
+}
