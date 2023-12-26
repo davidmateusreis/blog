@@ -6,7 +6,6 @@ footer {
     width: 100%;
     box-sizing: border-box;
     padding: 4%;
-    background-color: white;
     border: 1px solid #ccc;
     min-width: 768px;
 }

@@ -16,7 +16,6 @@
 }
 
 .news-title {
-    color: #333;
     font-size: 2em;
 }
 
@@ -25,8 +24,6 @@
 }
 
 .read-more-link {
-    color: #0000ee;
-    text-decoration: none;
     display: block;
     margin-top: 1%;
 }

@@ -6,7 +6,9 @@
                     <img src="./assets/imgs/logo.png" alt="Your Nintendo News logo">
                 </a>
             </li>
-            <li><h1>Your Nintendo News</h1></li>
+            <li>
+                <h1>Your Nintendo News</h1>
+            </li>
         </ul>
     </nav>
     <nav>
@@ -14,6 +16,16 @@
             <li>News</li>
             <li>Reviews</li>
             <li>Contact Us</li>
+        </ul>
+    </nav>
+    <nav>
+        <ul>
+            <li>
+                <button (click)="toggleDarkMode()">
+                    <img *ngIf="darkModeService.isDarkMode()" src="./assets/imgs/light-mode.png" alt="Dark Mode">
+                    <img *ngIf="!darkModeService.isDarkMode()" src="./assets/imgs/dark-mode.png" alt="Light Mode">
+                </button>
+            </li>
         </ul>
     </nav>
 </header>

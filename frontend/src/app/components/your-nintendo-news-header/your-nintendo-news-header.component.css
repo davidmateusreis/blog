@@ -6,7 +6,6 @@ header {
     width: 100%;
     box-sizing: border-box;
     padding: 4%;
-    background-color: white;
     border: 1px solid #ccc;
     min-width: 768px;
 }
@@ -25,4 +24,17 @@ header nav ul li {
     min-width: fit-content;
     cursor: pointer;
     list-style: none;
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0.2%;
+    margin-top: 20%;
+}
+
+button img {
+    width: 30px;
+    height: 30px;
 }
