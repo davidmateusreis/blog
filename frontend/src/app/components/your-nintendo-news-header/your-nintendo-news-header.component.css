@@ -8,6 +8,7 @@ header {
     padding: 4%;
     background-color: white;
     border: 1px solid #ccc;
+    min-width: 768px;
 }
 
 header nav ul {
