@@ -15,6 +15,10 @@
     max-width: 800px;
 }
 
+.news-image {
+    max-width: 100%;
+}
+
 .news-title {
     font-size: 2em;
 }

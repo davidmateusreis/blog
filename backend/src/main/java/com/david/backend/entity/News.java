@@ -20,4 +20,5 @@ public class News {
     @Column(columnDefinition = "TEXT")
     private String description;
     private String link;
+    private String imageUrl;
 }
