@@ -1,5 +1,6 @@
 package com.david.backend.service;
 
+import com.david.backend.dtos.NewsPageDto;
 import com.david.backend.entity.News;
 import com.david.backend.repository.NewsRepository;
 import com.rometools.fetcher.FeedFetcher;
@@ -9,12 +10,16 @@ import com.rometools.rome.feed.synd.SyndFeed;
 
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NewsService {
@@ -64,7 +69,9 @@ public class NewsService {
         }
     }
 
-    public List<News> getAllNews() {
-        return newsRepository.findAll();
+    public NewsPageDto getAllNews(int page, int size) {
+        Page<News> newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
+        List<News> newsList = newsPage.get().collect(Collectors.toList());
+        return new NewsPageDto(newsList, newsPage.getTotalElements(), newsPage.getTotalPages());
     }
 }
