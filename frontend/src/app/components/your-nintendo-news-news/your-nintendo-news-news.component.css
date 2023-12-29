@@ -23,9 +23,9 @@
     font-size: 2em;
 }
 
-.news-description {
+/* .news-description {
     margin-top: 10px;
-}
+} */
 
 .read-more-link {
     display: block;
@@ -34,4 +34,12 @@
 
 .news-date {
     margin-top: 1%;
+}
+
+.news-paginator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2%;
+    min-width: 768px;
 }

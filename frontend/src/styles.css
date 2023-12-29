@@ -19,3 +19,8 @@ a {
     color: #d80108;
     text-decoration: none;
 }
+
+body.dark-mode .pagination button {
+    color: #fff;
+    background-color: #444;
+}

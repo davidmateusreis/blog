@@ -7,6 +7,7 @@ import { YourNintendoNewsHeaderComponent } from './components/your-nintendo-news
 import { YourNintendoNewsNewsComponent } from './components/your-nintendo-news-news/your-nintendo-news-news.component';
 import { YourNintendoNewsFooterComponent } from './components/your-nintendo-news-footer/your-nintendo-news-footer.component';
 import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
+import { YourNintendoNewsPaginatorComponent } from './components/your-nintendo-news-paginator/your-nintendo-news-paginator.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
     YourNintendoNewsHeaderComponent,
     YourNintendoNewsNewsComponent,
     YourNintendoNewsFooterComponent,
-    DateAsAgoPipe
+    DateAsAgoPipe,
+    YourNintendoNewsPaginatorComponent
   ],
   imports: [
     BrowserModule,
