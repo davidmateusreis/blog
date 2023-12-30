@@ -24,3 +24,9 @@ body.dark-mode .pagination button {
     color: #fff;
     background-color: #444;
 }
+
+body.dark-mode input {
+    color: #fff;
+    background-color: #444;
+
+}
