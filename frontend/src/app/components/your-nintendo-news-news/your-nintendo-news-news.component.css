@@ -1,25 +1,29 @@
 .news-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    gap: 2%;
+    max-width: 80%;
     margin-top: 2%;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     min-width: 768px;
 }
 
 .news-item {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
+    margin-bottom: 1%;
     padding: 1%;
-    width: 80%;
-    max-width: 800px;
+    width: 486px;
+    max-width: 768px;
 }
 
 .news-image {
     max-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .news-title {
+    margin-top: 2%;
     font-size: 2em;
 }
 
@@ -29,11 +33,11 @@
 
 .read-more-link {
     display: block;
-    margin-top: 1%;
+    margin-top: 2%;
 }
 
 .news-date {
-    margin-top: 1%;
+    margin-top: 2%;
 }
 
 .news-paginator {
@@ -42,4 +46,5 @@
     align-items: center;
     margin-bottom: 2%;
     min-width: 768px;
+    padding: 1%;
 }
