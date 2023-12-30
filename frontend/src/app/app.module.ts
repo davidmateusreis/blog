@@ -8,6 +8,7 @@ import { YourNintendoNewsNewsComponent } from './components/your-nintendo-news-n
 import { YourNintendoNewsFooterComponent } from './components/your-nintendo-news-footer/your-nintendo-news-footer.component';
 import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
 import { YourNintendoNewsPaginatorComponent } from './components/your-nintendo-news-paginator/your-nintendo-news-paginator.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { YourNintendoNewsPaginatorComponent } from './components/your-nintendo-n
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

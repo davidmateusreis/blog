@@ -1,3 +1,7 @@
+<div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search for..." (keyup)="performSearch()">
+    <button (click)="performSearch()">Search</button>
+</div>
 <div class="news-container">
     <div *ngFor="let news of newsPage.news" class="news-item">
         <img class="news-image" [src]="news.imageUrl" alt="News Image">
@@ -7,7 +11,7 @@
         <p class="news-date">Posted {{ news.pubDate | dateAsAgo }}</p>
     </div>
 </div>
-<div class="news-paginator">
+<div class="paginator-container">
     <app-your-nintendo-news-paginator [currentPage]="currentPage" [totalPages]="newsPage.totalPages"
         (pageChange)="onPageChange($event)"></app-your-nintendo-news-paginator>
 </div>

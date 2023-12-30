@@ -13,10 +13,15 @@ export class YourNintendoNewsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getNews(page: number, size: number): Observable<NewsPage> {
-    const params = new HttpParams()
+  getNews(page: number, size: number, searchQuery?: string): Observable<NewsPage> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('size', size.toString());
+
+    if (searchQuery) {
+      params = params.set('searchQuery', searchQuery);
+    }
+
     return this.httpClient.get<NewsPage>(`${this.baseUrl}`, { params });
   }
 }
