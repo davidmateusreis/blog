@@ -20,8 +20,9 @@ public class NewsController {
     @CrossOrigin(origins = { "http://localhost:4200" })
     @GetMapping
     public NewsPageDto getAllNews(@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "6") int size) {
-        return newsService.getAllNews(page, size);
+            @RequestParam(defaultValue = "6") int size,
+            @RequestParam(required = false) String searchQuery) {
+        return newsService.getAllNews(page, size, searchQuery);
     }
 
     @GetMapping("/update")

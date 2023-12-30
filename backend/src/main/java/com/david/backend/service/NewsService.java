@@ -69,9 +69,30 @@ public class NewsService {
         }
     }
 
-    public NewsPageDto getAllNews(int page, int size) {
-        Page<News> newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
+    public NewsPageDto getAllNews(int page, int size, String searchQuery) {
+        Page<News> newsPage;
+
+        if (searchQuery != null && !searchQuery.isEmpty()) {
+            List<News> searchResult = newsRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(
+                    searchQuery,
+                    searchQuery);
+
+            // Pagination logic if needed
+            int startIndex = page * size;
+            int endIndex = Math.min(startIndex + size, searchResult.size());
+            List<News> paginatedResult = searchResult.subList(startIndex, endIndex);
+
+            return new NewsPageDto(paginatedResult, searchResult.size(),
+                    calculateTotalPages(searchResult.size(), size));
+        } else {
+            newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
+        }
+
         List<News> newsList = newsPage.get().collect(Collectors.toList());
         return new NewsPageDto(newsList, newsPage.getTotalElements(), newsPage.getTotalPages());
+    }
+
+    private int calculateTotalPages(int totalItems, int pageSize) {
+        return (int) Math.ceil((double) totalItems / pageSize);
     }
 }
