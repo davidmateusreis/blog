@@ -4,3 +4,29 @@
     box-sizing: border-box;
     font-family: 'Roboto';
 }
+
+body {
+    color: #333;
+    background-color: #fff;
+}
+
+body.dark-mode {
+    color: #fff;
+    background-color: #333;
+}
+
+a {
+    color: #d80108;
+    text-decoration: none;
+}
+
+body.dark-mode .pagination button {
+    color: #fff;
+    background-color: #444;
+}
+
+body.dark-mode input {
+    color: #fff;
+    background-color: #444;
+
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DarkModeService } from 'src/app/services/dark-mode.service';
 
 @Component({
   selector: 'app-your-nintendo-news-header',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class YourNintendoNewsHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public darkModeService: DarkModeService) { }
+
+  toggleDarkMode(): void {
+    this.darkModeService.toggleDarkMode();
+  }
 
   ngOnInit(): void {
   }
