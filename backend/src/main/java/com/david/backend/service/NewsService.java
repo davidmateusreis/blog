@@ -19,6 +19,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,7 +39,11 @@ public class NewsService {
             List<News> newsList = new ArrayList<>();
 
             for (SyndEntry entry : syndFeed.getEntries()) {
+                String guid = entry.getUri();
+                Long extractedNumber = extractNumberFromGuid(guid);
+
                 News news = new News();
+                news.setId(extractedNumber);
                 news.setTitle(entry.getTitle());
                 news.setLink(entry.getLink());
                 news.setDescription(entry.getDescription().getValue());
@@ -67,6 +73,18 @@ public class NewsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private Long extractNumberFromGuid(String guid) {
+        String[] parts = guid.split("-");
+        if (parts.length > 0) {
+            try {
+                return Long.parseLong(parts[parts.length - 1]);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     public NewsPageDto getAllNews(int page, int size, String searchQuery) {
