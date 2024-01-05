@@ -27,17 +27,22 @@
     font-size: 2em;
 }
 
-/* .news-description {
-    margin-top: 10px;
-} */
-
 .read-more-link {
     display: block;
     margin-top: 2%;
 }
 
 .news-date {
-    margin-top: 2%;
+    margin-top: 3%;
+}
+
+.news-date a {
+    color: #d80108;
+    font-weight: bold;
+}
+
+.news-date a:hover {
+    color: #b80108;
 }
 
 .paginator-container {

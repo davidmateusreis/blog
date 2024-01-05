@@ -16,8 +16,12 @@ body.dark-mode {
 }
 
 a {
-    color: #d80108;
+    color: #333;
     text-decoration: none;
+}
+
+body.dark-mode a {
+    color: #fff;
 }
 
 body.dark-mode .pagination button {
@@ -28,5 +32,4 @@ body.dark-mode .pagination button {
 body.dark-mode input {
     color: #fff;
     background-color: #444;
-
 }
