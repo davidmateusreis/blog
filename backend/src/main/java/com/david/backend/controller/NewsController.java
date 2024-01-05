@@ -24,10 +24,4 @@ public class NewsController {
             @RequestParam(required = false) String searchQuery) {
         return newsService.getAllNews(page, size, searchQuery);
     }
-
-    @GetMapping("/update")
-    public String updateNewsFromRSS() {
-        newsService.fetchAndSaveNewsFromRSS("https://www.nintendolife.com/feeds/news");
-        return "News updated successfully!";
-    }
 }

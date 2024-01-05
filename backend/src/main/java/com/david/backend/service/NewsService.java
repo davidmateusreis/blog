@@ -13,14 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -87,6 +86,11 @@ public class NewsService {
         return null;
     }
 
+    @Scheduled(fixedRate = 600000)
+    public void updateNewsFromRSS() {
+        fetchAndSaveNewsFromRSS("https://www.nintendolife.com/feeds/news");
+    }
+
     public NewsPageDto getAllNews(int page, int size, String searchQuery) {
         Page<News> newsPage;
 
@@ -95,7 +99,6 @@ public class NewsService {
                     searchQuery,
                     searchQuery);
 
-            // Pagination logic if needed
             int startIndex = page * size;
             int endIndex = Math.min(startIndex + size, searchResult.size());
             List<News> paginatedResult = searchResult.subList(startIndex, endIndex);
