@@ -99,9 +99,13 @@ public class NewsService {
                     searchQuery,
                     searchQuery);
 
+            List<News> sortedSearchResult = searchResult.stream()
+                    .sorted((n1, n2) -> n2.getPubDate().compareTo(n1.getPubDate()))
+                    .collect(Collectors.toList());
+
             int startIndex = page * size;
-            int endIndex = Math.min(startIndex + size, searchResult.size());
-            List<News> paginatedResult = searchResult.subList(startIndex, endIndex);
+            int endIndex = Math.min(startIndex + size, sortedSearchResult.size());
+            List<News> paginatedResult = sortedSearchResult.subList(startIndex, endIndex);
 
             return new NewsPageDto(paginatedResult, searchResult.size(),
                     calculateTotalPages(searchResult.size(), size));
