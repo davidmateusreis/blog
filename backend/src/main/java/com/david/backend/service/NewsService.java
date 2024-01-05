@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,11 +43,22 @@ public class NewsService {
                 String guid = entry.getUri();
                 Long extractedNumber = extractNumberFromGuid(guid);
 
+                String webMaster = syndFeed.getWebMaster();
+                String regex = "\\((.*?)\\)";
+
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(webMaster);
+
                 News news = new News();
                 news.setId(extractedNumber);
+                news.setAuthor(webMaster);
                 news.setTitle(entry.getTitle());
                 news.setLink(entry.getLink());
                 news.setDescription(entry.getDescription().getValue());
+
+                if (matcher.find()) {
+                    news.setAuthor(matcher.group(1));
+                }
 
                 List<Element> contentElements = entry.getForeignMarkup();
                 for (Element element : contentElements) {

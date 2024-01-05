@@ -17,6 +17,7 @@ public class News {
 
     @Id
     private Long id;
+    private String author;
     private String title;
     @Column(columnDefinition = "TEXT")
     private String description;

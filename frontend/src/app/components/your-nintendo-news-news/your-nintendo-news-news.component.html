@@ -5,10 +5,9 @@
 <div class="news-container">
     <div *ngFor="let news of newsPage.news" class="news-item">
         <img class="news-image" [src]="news.imageUrl" alt="News Image">
-        <h2 class="news-title">{{ news.title }}</h2>
-        <!-- <div class="news-description" [innerHTML]="removeLastParagraph(news.description)"></div> -->
-        <a [href]="news.link" target="_blank" class="read-more-link">Read more</a>
-        <p class="news-date">Posted {{ news.pubDate | dateAsAgo }}</p>
+        <h2 class="news-title"><a [href]="news.link" target="_blank">{{ news.title }}</a></h2>
+        <p class="news-date">Posted on <a href="http://www.nintendolife.com/" target="_blank">{{news.author}}</a> {{
+            news.pubDate | dateAsAgo }}</p>
     </div>
 </div>
 <div class="paginator-container">
