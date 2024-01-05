@@ -11,10 +11,11 @@ header {
 
 header nav ul {
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     width: fit-content;
     gap: 1rem;
-
 }
 
 header nav ul li {
@@ -23,6 +24,7 @@ header nav ul li {
     min-width: fit-content;
     cursor: pointer;
     list-style: none;
+    margin-bottom: 1%;
 }
 
 button {
