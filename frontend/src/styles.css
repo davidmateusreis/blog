@@ -33,3 +33,8 @@ body.dark-mode input {
     color: #fff;
     background-color: #444;
 }
+
+body.dark-mode textarea {
+    color: #fff;
+    background-color: #444;
+}

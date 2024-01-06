@@ -8,8 +8,9 @@ import { YourNintendoNewsNewsComponent } from './components/your-nintendo-news-n
 import { YourNintendoNewsFooterComponent } from './components/your-nintendo-news-footer/your-nintendo-news-footer.component';
 import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
 import { YourNintendoNewsPaginatorComponent } from './components/your-nintendo-news-paginator/your-nintendo-news-paginator.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { YourNintendoNewsContactComponent } from './components/your-nintendo-news-contact/your-nintendo-news-contact.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +19,15 @@ import { AppRoutingModule } from './app-routing.module';
     YourNintendoNewsNewsComponent,
     YourNintendoNewsFooterComponent,
     DateAsAgoPipe,
-    YourNintendoNewsPaginatorComponent
+    YourNintendoNewsPaginatorComponent,
+    YourNintendoNewsContactComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

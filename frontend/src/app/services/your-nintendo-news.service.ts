@@ -22,6 +22,6 @@ export class YourNintendoNewsService {
       params = params.set('searchQuery', searchQuery);
     }
 
-    return this.httpClient.get<NewsPage>(`${this.baseUrl}`, { params });
+    return this.httpClient.get<NewsPage>(`${this.baseUrl + '/news'}`, { params });
   }
 }

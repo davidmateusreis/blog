@@ -1,0 +1,24 @@
+<div class="contact-container">
+    <div>
+        <h2>Got questions or suggestions? Reach out to us using the form below!</h2>
+    </div>
+    <form [formGroup]="contactForm" id="contactForm" (ngSubmit)="onSubmit()">
+        <div>
+            <input type="text" formControlName="messageAuthor" id="messageAuthor" placeholder="Your name"
+                name="messageAuthor" required>
+        </div>
+
+        <div>
+            <input type="email" formControlName="messageEmail" id="messageEmail" placeholder="Your email"
+                name="messageEmail" required>
+        </div>
+
+        <div>
+            <textarea type="text" formControlName="messageContent" id="messageContent" placeholder="Your message"
+                name="messageContent" rows="10" required></textarea>
+        </div>
+        <div>
+            <button type="submit" form="contactForm">Send</button>
+        </div>
+    </form>
+</div>
