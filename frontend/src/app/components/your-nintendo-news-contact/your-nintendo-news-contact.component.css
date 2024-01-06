@@ -54,3 +54,13 @@ button {
 button:hover {
     background-color: #b80108;
 }
+
+.valid-feedback {
+    color: #28a808;
+    padding: 1%;
+}
+
+.invalid-feedback {
+    color: #d80108;
+    padding: 1%;
+}
