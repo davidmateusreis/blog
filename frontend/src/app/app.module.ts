@@ -11,6 +11,7 @@ import { YourNintendoNewsPaginatorComponent } from './components/your-nintendo-n
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { YourNintendoNewsContactComponent } from './components/your-nintendo-news-contact/your-nintendo-news-contact.component';
+import { YourNintendoNewsAboutComponent } from './components/your-nintendo-news-about/your-nintendo-news-about.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { YourNintendoNewsContactComponent } from './components/your-nintendo-new
     YourNintendoNewsFooterComponent,
     DateAsAgoPipe,
     YourNintendoNewsPaginatorComponent,
-    YourNintendoNewsContactComponent
+    YourNintendoNewsContactComponent,
+    YourNintendoNewsAboutComponent
   ],
   imports: [
     BrowserModule,
