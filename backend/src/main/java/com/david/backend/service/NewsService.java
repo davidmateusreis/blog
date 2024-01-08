@@ -30,6 +30,11 @@ public class NewsService {
     @Autowired
     private NewsRepository newsRepository;
 
+    private static final List<String> RSS_FEED_URLS = List.of(
+            "https://www.nintendolife.com/feeds/news",
+            "https://www.pushsquare.com/feeds/news",
+            "https://www.purexbox.com/feeds/news");
+
     public void fetchAndSaveNewsFromRSS(String rssFeedUrl) {
         try {
             FeedFetcher feedFetcher = new HttpURLFeedFetcher();
@@ -101,7 +106,9 @@ public class NewsService {
 
     @Scheduled(fixedRate = 600000)
     public void updateNewsFromRSS() {
-        fetchAndSaveNewsFromRSS("https://www.nintendolife.com/feeds/news");
+        for (String rssFeedUrl : RSS_FEED_URLS) {
+            fetchAndSaveNewsFromRSS(rssFeedUrl);
+        }
     }
 
     public NewsPageDto getAllNews(int page, int size, String searchQuery) {
