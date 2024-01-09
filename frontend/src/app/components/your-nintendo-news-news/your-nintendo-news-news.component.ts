@@ -11,7 +11,7 @@ export class YourNintendoNewsNewsComponent implements OnInit {
 
   newsPage: NewsPage = { news: [], totalElements: 0, totalPages: 0 };
   currentPage = 0;
-  size = 6;
+  size = 12;
   searchQuery: string = '';
 
   @Output() searchEvent = new EventEmitter<string>();
@@ -46,6 +46,32 @@ export class YourNintendoNewsNewsComponent implements OnInit {
             console.log('Error loading news:', error);
           }
         );
+    }
+  }
+
+  getAuthorColor(author: string): string {
+    switch (author.toLowerCase()) {
+      case 'nintendo life':
+        return '#d80108';
+      case 'push square':
+        return '#094da4';
+      case 'pure xbox':
+        return '#5cb91f';
+      default:
+        return '#d80108';
+    }
+  }
+
+  getAuthorLink(author: string): string {
+    switch (author.toLowerCase()) {
+      case 'nintendo life':
+        return 'http://www.nintendolife.com/';
+      case 'push square':
+        return 'http://www.pushsquare.com/';
+      case 'pure xbox':
+        return 'http://www.purexbox.com/';
+      default:
+        return '';
     }
   }
 

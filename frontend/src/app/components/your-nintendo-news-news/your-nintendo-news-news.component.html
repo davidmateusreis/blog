@@ -6,7 +6,8 @@
     <div *ngFor="let news of newsPage.news" class="news-item">
         <img class="news-image" [src]="news.imageUrl" alt="News Image">
         <h2 class="news-title"><a [href]="news.link" target="_blank">{{ news.title }}</a></h2>
-        <p class="news-date">Posted on <a href="http://www.nintendolife.com/" target="_blank">{{news.author}}</a> {{
+        <p class="news-date">Posted on <a [href]="getAuthorLink(news.author)" target="_blank"
+                [style.color]="getAuthorColor(news.author)">{{news.author}}</a> {{
             news.pubDate | dateAsAgo }}</p>
     </div>
 </div>

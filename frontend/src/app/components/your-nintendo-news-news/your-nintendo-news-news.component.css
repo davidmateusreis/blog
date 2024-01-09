@@ -37,12 +37,12 @@
 }
 
 .news-date a {
-    color: #d80108;
     font-weight: bold;
 }
 
 .news-date a:hover {
-    color: #b80108;
+    filter: brightness(0.8);
+    transition: color 0.3s;
 }
 
 .paginator-container {
