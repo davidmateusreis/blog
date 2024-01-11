@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { YourNintendoNewsContactComponent } from './components/your-nintendo-news-contact/your-nintendo-news-contact.component';
 import { YourNintendoNewsAboutComponent } from './components/your-nintendo-news-about/your-nintendo-news-about.component';
 import { YourNintendoNewsNewsDetailsComponent } from './components/your-nintendo-news-news-details/your-nintendo-news-news-details.component';
+import { YourNintendoNewsTermsComponent } from './components/your-nintendo-news-terms/your-nintendo-news-terms.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { YourNintendoNewsNewsDetailsComponent } from './components/your-nintendo
     YourNintendoNewsPaginatorComponent,
     YourNintendoNewsContactComponent,
     YourNintendoNewsAboutComponent,
-    YourNintendoNewsNewsDetailsComponent
+    YourNintendoNewsNewsDetailsComponent,
+    YourNintendoNewsTermsComponent
   ],
   imports: [
     BrowserModule,
