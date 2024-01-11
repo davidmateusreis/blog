@@ -140,4 +140,8 @@ public class NewsService {
     private int calculateTotalPages(int totalItems, int pageSize) {
         return (int) Math.ceil((double) totalItems / pageSize);
     }
+
+    public News getNewsDetailsById(Long id) {
+        return newsRepository.findById(id).get();
+    }
 }
