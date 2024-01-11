@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NewsPage } from 'src/app/models/news-page.model';
 import { YourNintendoNewsService } from 'src/app/services/your-nintendo-news.service';
 
@@ -16,16 +17,18 @@ export class YourNintendoNewsNewsComponent implements OnInit {
 
   @Output() searchEvent = new EventEmitter<string>();
 
-  constructor(private yourNintendoNewsService: YourNintendoNewsService) { }
+  constructor(
+    private yourNintendoNewsService: YourNintendoNewsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadNews();
   }
 
   loadNews(): void {
-    // Check if a search query is present
     if (this.searchQuery.trim() !== '') {
-      // If search query is present, fetch search results
+
       this.yourNintendoNewsService.getNews(0, this.size, this.searchQuery)
         .subscribe(
           (response: NewsPage) => {
@@ -36,7 +39,7 @@ export class YourNintendoNewsNewsComponent implements OnInit {
           }
         );
     } else {
-      // If no search query, fetch regular news
+
       this.yourNintendoNewsService.getNews(this.currentPage, this.size)
         .subscribe(
           (response: NewsPage) => {
@@ -47,6 +50,10 @@ export class YourNintendoNewsNewsComponent implements OnInit {
           }
         );
     }
+  }
+
+  showNewsDetails(id: number) {
+    this.router.navigate(['news', id]);
   }
 
   getAuthorColor(author: string): string {
@@ -82,21 +89,5 @@ export class YourNintendoNewsNewsComponent implements OnInit {
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
     this.loadNews();
-  }
-
-  removeLastParagraph(text: string): string {
-
-    const lastIndex = text.lastIndexOf('<p>');
-
-    if (lastIndex !== -1) {
-      const openingTagEndIndex = lastIndex + 2;
-      const closingTagStartIndex = text.indexOf('</p>', openingTagEndIndex);
-
-      if (closingTagStartIndex !== -1) {
-        return text.substring(0, lastIndex) + text.substring(closingTagStartIndex + 4);
-      }
-    }
-
-    return text;
   }
 }

@@ -25,11 +25,7 @@
 .news-title {
     margin-top: 2%;
     font-size: 2em;
-}
-
-.read-more-link {
-    display: block;
-    margin-top: 2%;
+    cursor: pointer;
 }
 
 .news-date {
