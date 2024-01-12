@@ -25,19 +25,20 @@
 .news-title {
     margin-top: 2%;
     font-size: 2em;
-}
-
-/* .news-description {
-    margin-top: 10px;
-} */
-
-.read-more-link {
-    display: block;
-    margin-top: 2%;
+    cursor: pointer;
 }
 
 .news-date {
-    margin-top: 2%;
+    margin-top: 3%;
+}
+
+.news-date a {
+    font-weight: bold;
+}
+
+.news-date a:hover {
+    filter: brightness(0.8);
+    transition: color 0.3s;
 }
 
 .paginator-container {

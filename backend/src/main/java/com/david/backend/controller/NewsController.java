@@ -3,11 +3,13 @@ package com.david.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.david.backend.dtos.NewsPageDto;
+import com.david.backend.entity.News;
 import com.david.backend.service.NewsService;
 
 @RestController
@@ -25,9 +27,9 @@ public class NewsController {
         return newsService.getAllNews(page, size, searchQuery);
     }
 
-    @GetMapping("/update")
-    public String updateNewsFromRSS() {
-        newsService.fetchAndSaveNewsFromRSS("https://www.nintendolife.com/feeds/news");
-        return "News updated successfully!";
+    @CrossOrigin(origins = { "http://localhost:4200" })
+    @GetMapping("{id}")
+    public News getNewsDetailsById(@PathVariable Long id) {
+        return newsService.getNewsDetailsById(id);
     }
 }
