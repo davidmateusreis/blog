@@ -1,0 +1,12 @@
+.disqus-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 1%;
+    width: 100%;
+    min-width: 768px;
+    max-width: 768px;
+}
