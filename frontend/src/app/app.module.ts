@@ -12,6 +12,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { YourNintendoNewsContactComponent } from './components/your-nintendo-news-contact/your-nintendo-news-contact.component';
 import { YourNintendoNewsAboutComponent } from './components/your-nintendo-news-about/your-nintendo-news-about.component';
+import { YourNintendoNewsNewsDetailsComponent } from './components/your-nintendo-news-news-details/your-nintendo-news-news-details.component';
+import { YourNintendoNewsTermsComponent } from './components/your-nintendo-news-terms/your-nintendo-news-terms.component';
+import { YourNintendoNewsPrivacyComponent } from './components/your-nintendo-news-privacy/your-nintendo-news-privacy.component';
+import { DisqusComponent } from './components/disqus/disqus.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { YourNintendoNewsAboutComponent } from './components/your-nintendo-news-
     DateAsAgoPipe,
     YourNintendoNewsPaginatorComponent,
     YourNintendoNewsContactComponent,
-    YourNintendoNewsAboutComponent
+    YourNintendoNewsAboutComponent,
+    YourNintendoNewsNewsDetailsComponent,
+    YourNintendoNewsTermsComponent,
+    YourNintendoNewsPrivacyComponent,
+    DisqusComponent
   ],
   imports: [
     BrowserModule,

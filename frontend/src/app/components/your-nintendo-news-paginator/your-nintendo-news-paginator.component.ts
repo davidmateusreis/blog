@@ -30,6 +30,28 @@ export class YourNintendoNewsPaginatorComponent {
   }
 
   getPageNumbers(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    const totalPages = this.totalPages;
+    const currentPage = this.currentPage + 1;
+
+    // If there are 4 or fewer pages, return all pages
+    if (totalPages <= 4) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    // Calculate the starting page to display
+    let startPage = currentPage - 1;
+
+    // If the starting page is less than 1, set it to 1
+    if (startPage < 1) {
+      startPage = 1;
+    }
+
+    // If the starting page is more than totalPages - 3, adjust it to display the last 4 pages
+    if (startPage > totalPages - 3) {
+      startPage = totalPages - 3;
+    }
+
+    // Return an array of 4 consecutive page numbers starting from the calculated startPage
+    return Array.from({ length: 4 }, (_, i) => startPage + i);
   }
 }
