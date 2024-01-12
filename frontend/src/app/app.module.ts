@@ -15,6 +15,7 @@ import { YourNintendoNewsAboutComponent } from './components/your-nintendo-news-
 import { YourNintendoNewsNewsDetailsComponent } from './components/your-nintendo-news-news-details/your-nintendo-news-news-details.component';
 import { YourNintendoNewsTermsComponent } from './components/your-nintendo-news-terms/your-nintendo-news-terms.component';
 import { YourNintendoNewsPrivacyComponent } from './components/your-nintendo-news-privacy/your-nintendo-news-privacy.component';
+import { DisqusComponent } from './components/disqus/disqus.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { YourNintendoNewsPrivacyComponent } from './components/your-nintendo-new
     YourNintendoNewsAboutComponent,
     YourNintendoNewsNewsDetailsComponent,
     YourNintendoNewsTermsComponent,
-    YourNintendoNewsPrivacyComponent
+    YourNintendoNewsPrivacyComponent,
+    DisqusComponent
   ],
   imports: [
     BrowserModule,
