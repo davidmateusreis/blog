@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +29,11 @@ public class NewsService {
 
     @Autowired
     private NewsRepository newsRepository;
+
+    private static final List<String> RSS_FEED_URLS = List.of(
+            "https://www.nintendolife.com/feeds/news",
+            "https://www.pushsquare.com/feeds/news",
+            "https://www.purexbox.com/feeds/news");
 
     public void fetchAndSaveNewsFromRSS(String rssFeedUrl) {
         try {
@@ -37,10 +45,25 @@ public class NewsService {
             List<News> newsList = new ArrayList<>();
 
             for (SyndEntry entry : syndFeed.getEntries()) {
+                String guid = entry.getUri();
+                Long extractedNumber = extractNumberFromGuid(guid);
+
+                String webMaster = syndFeed.getWebMaster();
+                String regex = "\\((.*?)\\)";
+
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(webMaster);
+
                 News news = new News();
+                news.setId(extractedNumber);
+                news.setAuthor(webMaster);
                 news.setTitle(entry.getTitle());
                 news.setLink(entry.getLink());
                 news.setDescription(entry.getDescription().getValue());
+
+                if (matcher.find()) {
+                    news.setAuthor(matcher.group(1));
+                }
 
                 List<Element> contentElements = entry.getForeignMarkup();
                 for (Element element : contentElements) {
@@ -69,6 +92,25 @@ public class NewsService {
         }
     }
 
+    private Long extractNumberFromGuid(String guid) {
+        String[] parts = guid.split("-");
+        if (parts.length > 0) {
+            try {
+                return Long.parseLong(parts[parts.length - 1]);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    @Scheduled(fixedRate = 600000)
+    public void updateNewsFromRSS() {
+        for (String rssFeedUrl : RSS_FEED_URLS) {
+            fetchAndSaveNewsFromRSS(rssFeedUrl);
+        }
+    }
+
     public NewsPageDto getAllNews(int page, int size, String searchQuery) {
         Page<News> newsPage;
 
@@ -77,10 +119,13 @@ public class NewsService {
                     searchQuery,
                     searchQuery);
 
-            // Pagination logic if needed
+            List<News> sortedSearchResult = searchResult.stream()
+                    .sorted((n1, n2) -> n2.getPubDate().compareTo(n1.getPubDate()))
+                    .collect(Collectors.toList());
+
             int startIndex = page * size;
-            int endIndex = Math.min(startIndex + size, searchResult.size());
-            List<News> paginatedResult = searchResult.subList(startIndex, endIndex);
+            int endIndex = Math.min(startIndex + size, sortedSearchResult.size());
+            List<News> paginatedResult = sortedSearchResult.subList(startIndex, endIndex);
 
             return new NewsPageDto(paginatedResult, searchResult.size(),
                     calculateTotalPages(searchResult.size(), size));
@@ -94,5 +139,9 @@ public class NewsService {
 
     private int calculateTotalPages(int totalItems, int pageSize) {
         return (int) Math.ceil((double) totalItems / pageSize);
+    }
+
+    public News getNewsDetailsById(Long id) {
+        return newsRepository.findById(id).get();
     }
 }

@@ -2,17 +2,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4%;
+    gap: 6px;
 }
 
 .pagination button {
-    padding: 8%;
+    height: 42px;
+    padding: 0 10px;
     cursor: pointer;
     border: none;
     font-size: medium;
+    transition: background-color 0.3s;
 }
 
 .pagination button.active {
     background-color: #d80108;
     color: #fff;
+}
+
+.pagination button.active:hover {
+    background-color: #b80108;
+}
+
+.pagination button:not(.active):hover {
+    filter: contrast(0.8)
 }

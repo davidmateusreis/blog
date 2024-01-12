@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { NewsPage } from '../models/news-page.model';
+import { News } from '../models/news.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class YourNintendoNewsService {
       params = params.set('searchQuery', searchQuery);
     }
 
-    return this.httpClient.get<NewsPage>(`${this.baseUrl}`, { params });
+    return this.httpClient.get<NewsPage>(`${this.baseUrl + '/news'}`, { params });
+  }
+
+  public getNewsDetailsById(id: number) {
+    return this.httpClient.get<News>(`${this.baseUrl}/news/${id}`);
   }
 }
