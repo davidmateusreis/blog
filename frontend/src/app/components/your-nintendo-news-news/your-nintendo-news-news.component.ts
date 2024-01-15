@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NewsPage } from 'src/app/models/news-page.model';
+import { News } from 'src/app/models/news.model';
 import { YourNintendoNewsService } from 'src/app/services/your-nintendo-news.service';
 
 @Component({
@@ -52,8 +53,13 @@ export class YourNintendoNewsNewsComponent implements OnInit {
     }
   }
 
-  showNewsDetails(id: number) {
-    this.router.navigate(['news', id]);
+  showNewsDetails(news: News) {
+    const pubDate = new Date(news.pubDate);
+    const year = pubDate.getFullYear();
+    const month = (pubDate.getMonth() + 1).toString().padStart(2, '0');
+    const slug = news.link.split('/').slice(-1)[0];
+
+    this.router.navigate(['news', news.id, year, month, slug]);
   }
 
   getAuthorColor(author: string): string {
