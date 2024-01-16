@@ -1,6 +1,6 @@
 <div class="contact-container">
     <div>
-        <h2>Got questions or suggestions?<br>Reach out to us using the form below!</h2>
+        <h2>Got questions or suggestions?<br>Reach out to us using the form below!<br>We'll really appreciate!</h2>
     </div>
     <form [formGroup]="contactForm" id="contactForm" (ngSubmit)="onSubmit()">
         <div>
@@ -35,7 +35,7 @@
             <textarea type="text" formControlName="messageContent" id="messageContent" placeholder="Your message"
                 name="messageContent"
                 [ngClass]="{'is-invalid':submitted && contactForm.get('messageContent')?.errors, 'is-valid':contactForm.get('messageContent')?.valid}"
-                rows="10" required></textarea>
+                rows="12" required></textarea>
             <div *ngIf="contactForm.get('messageContent')?.dirty && contactForm.get('messageContent')?.hasError('required')"
                 class="invalid-feedback">Please
                 enter your
