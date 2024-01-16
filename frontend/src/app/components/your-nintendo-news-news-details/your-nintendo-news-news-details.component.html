@@ -3,11 +3,13 @@
         <img class="news-image" *ngIf="newsDetails.imageUrl" [src]="newsDetails.imageUrl" alt="News Image">
         <h2 class="news-title">{{ newsDetails.title }}</h2>
         <p class="news-description" [innerHTML]="removeLastParagraph(newsDetails.description)"></p>
+        <a class="news-read-more" [href]="newsDetails.link" target="_blank"
+            [style.color]="getAuthorColor(newsDetails.author)">
+            <p><strong>Continue reading on {{newsDetails.author}}</strong></p>
+        </a>
         <p class="news-date">Posted on <a [href]="getAuthorLink(newsDetails.author)" target="_blank"
                 [style.color]="getAuthorColor(newsDetails.author)">{{newsDetails.author}}</a> {{
             newsDetails.pubDate | dateAsAgo }}</p>
-        <button [style.background-color]="getAuthorColor(newsDetails.author)"><a [href]="newsDetails.link"
-                target="_blank">Continue reading on {{newsDetails.author}}</a></button>
         <div class="share-buttons">
             <a [href]="getFacebookShareLink(newsDetails)" target="_blank" rel="noopener noreferrer"><img
                     src="./assets/imgs/facebook.png" alt="Facebook" /></a>

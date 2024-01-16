@@ -30,6 +30,16 @@
 
 .news-description {
     margin-top: 2%;
+    line-height: 1.4;
+}
+
+.news-read-more p {
+    margin-top: 1%;
+}
+
+.news-read-more p:hover {
+    filter: brightness(0.8);
+    transition: color 0.3s;
 }
 
 .news-date {
@@ -75,7 +85,7 @@ p {
 }
 
 .share-buttons img {
-    width: 48px;
+    width: 36px;
 }
 
 .share-buttons img:hover {
