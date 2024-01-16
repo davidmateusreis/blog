@@ -8,6 +8,16 @@
             newsDetails.pubDate | dateAsAgo }}</p>
         <button [style.background-color]="getAuthorColor(newsDetails.author)"><a [href]="newsDetails.link"
                 target="_blank">Continue reading on {{newsDetails.author}}</a></button>
+        <div class="share-buttons">
+            <a [href]="getFacebookShareLink(newsDetails)" target="_blank" rel="noopener noreferrer"><img
+                    src="./assets/imgs/facebook.png" alt="Facebook" /></a>
+            <a [href]="getTwitterShareLink(newsDetails)" target="_blank" rel="noopener noreferrer"><img
+                    src="./assets/imgs/twitter.png" alt="Twitter" /></a>
+            <a [href]="getRedditShareLink(newsDetails)" target="_blank" rel="noopener noreferrer"><img
+                    src="./assets/imgs/reddit.png" alt="Reddit" /></a>
+            <a [href]="getWhatsAppShareLink(newsDetails)" target="_blank" rel="noopener noreferrer"><img
+                    src="./assets/imgs/whatsapp.png" alt="WhatsApp" /></a>
+        </div>
     </div>
 </div>
 <app-disqus></app-disqus>

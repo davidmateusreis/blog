@@ -65,4 +65,21 @@ export class YourNintendoNewsNewsDetailsComponent implements OnInit {
 
     return text;
   }
+
+  getFacebookShareLink(newsDetails: News): string {
+    return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(newsDetails.link)}`;
+  }
+
+  getTwitterShareLink(newsDetails: News): string {
+    return `https://twitter.com/intent/tweet?url=${encodeURIComponent(newsDetails.link)}&text=${encodeURIComponent(newsDetails.title)}`;
+  }
+
+  getRedditShareLink(newsDetails: News): string {
+    const redditTitle = encodeURIComponent(newsDetails.title);
+    return `https://www.reddit.com/submit?url=${encodeURIComponent(newsDetails.link)}&title=${redditTitle}`;
+  }
+
+  getWhatsAppShareLink(newsDetails: News): string {
+    return `https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out this news: ${newsDetails.title} ${newsDetails.link}`)}`;
+  }
 }
