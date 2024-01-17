@@ -55,24 +55,6 @@
     transition: color 0.3s;
 }
 
-button {
-    margin-top: 1%;
-    padding: 2%;
-    width: 100%;
-    font-size: 1rem;
-    cursor: pointer;
-    border: none;
-}
-
-button a {
-    color: #fff;
-}
-
-button:hover {
-    filter: brightness(0.8);
-    transition: color 0.3s;
-}
-
 p {
     text-align: justify;
 }
@@ -89,6 +71,6 @@ p {
 }
 
 .share-buttons img:hover {
-    filter: brightness(0.8);
-    transition: color 0.3s;
+    transform: translateY(-5px);
+    transition: all 0.4s;
 }
