@@ -26,7 +26,7 @@ export class YourNintendoNewsService {
     return this.httpClient.get<NewsPage>(`${this.baseUrl + '/news'}`, { params });
   }
 
-  public getNewsDetailsById(id: number) {
-    return this.httpClient.get<News>(`${this.baseUrl}/news/${id}`);
+  public getNewsDetailsBySlug(slug: string) {
+    return this.httpClient.get<News>(`${this.baseUrl}/news/${slug}`);
   }
 }

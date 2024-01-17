@@ -11,7 +11,7 @@ import { YourNintendoNewsService } from 'src/app/services/your-nintendo-news.ser
 })
 export class YourNintendoNewsNewsDetailsComponent implements OnInit {
 
-  id!: number;
+  slug!: string;
   newsDetails$!: Observable<News>;
 
   constructor(
@@ -20,8 +20,8 @@ export class YourNintendoNewsNewsDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.id = +this.activatedRoute.snapshot.paramMap.get('id')!;
-    this.newsDetails$ = this.yourNintendoNewsService.getNewsDetailsById(this.id);
+    this.slug = this.activatedRoute.snapshot.paramMap.get('slug')!;
+    this.newsDetails$ = this.yourNintendoNewsService.getNewsDetailsBySlug(this.slug);
   }
 
   getAuthorColor(author: string): string {

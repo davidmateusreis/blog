@@ -28,8 +28,8 @@ public class NewsController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" })
-    @GetMapping("{id}")
-    public News getNewsDetailsById(@PathVariable Long id) {
-        return newsService.getNewsDetailsById(id);
+    @GetMapping("{slug}")
+    public News getNewsDetailsBySlug(@PathVariable String slug) {
+        return newsService.getNewsDetailsBySlug(slug);
     }
 }

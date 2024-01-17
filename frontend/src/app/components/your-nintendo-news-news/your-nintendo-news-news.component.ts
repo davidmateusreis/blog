@@ -57,9 +57,9 @@ export class YourNintendoNewsNewsComponent implements OnInit {
     const pubDate = new Date(news.pubDate);
     const year = pubDate.getFullYear();
     const month = (pubDate.getMonth() + 1).toString().padStart(2, '0');
-    const slug = news.link.split('/').slice(-1)[0];
+    const slug = news.slug;
 
-    this.router.navigate(['news', news.id, year, month, slug]);
+    this.router.navigate(['news', year, month, slug]);
   }
 
   getAuthorColor(author: string): string {

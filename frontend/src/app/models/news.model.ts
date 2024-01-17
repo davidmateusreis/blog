@@ -6,4 +6,5 @@ export interface News {
     link: string;
     imageUrl: string;
     pubDate: Date;
+    slug: String;
 }

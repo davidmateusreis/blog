@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: YourNintendoNewsNewsComponent },
   { path: 'contact', component: YourNintendoNewsContactComponent },
   { path: 'about', component: YourNintendoNewsAboutComponent },
-  { path: 'news/:id/:year/:month/:slug', component: YourNintendoNewsNewsDetailsComponent },
+  { path: 'news/:year/:month/:slug', component: YourNintendoNewsNewsDetailsComponent },
   { path: 'terms', component: YourNintendoNewsTermsComponent },
   { path: 'privacy', component: YourNintendoNewsPrivacyComponent }
 ];

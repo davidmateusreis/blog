@@ -25,4 +25,5 @@ public class News {
     private String imageUrl;
     @Temporal(TemporalType.TIMESTAMP)
     private Date pubDate;
+    private String slug;
 }

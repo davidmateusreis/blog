@@ -54,12 +54,15 @@ public class NewsService {
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(webMaster);
 
+                String slug = generateSlug(entry.getTitle());
+
                 News news = new News();
                 news.setId(extractedNumber);
                 news.setAuthor(webMaster);
                 news.setTitle(entry.getTitle());
                 news.setLink(entry.getLink());
                 news.setDescription(entry.getDescription().getValue());
+                news.setSlug(slug);
 
                 if (matcher.find()) {
                     news.setAuthor(matcher.group(1));
@@ -90,6 +93,11 @@ public class NewsService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String generateSlug(String input) {
+        String normalizedInput = input.trim().toLowerCase().replaceAll("\\s+", "-");
+        return normalizedInput.replaceAll("[^a-z0-9-]", "");
     }
 
     private Long extractNumberFromGuid(String guid) {
@@ -141,7 +149,7 @@ public class NewsService {
         return (int) Math.ceil((double) totalItems / pageSize);
     }
 
-    public News getNewsDetailsById(Long id) {
-        return newsRepository.findById(id).get();
+    public News getNewsDetailsBySlug(String slug) {
+        return newsRepository.findBySlug(slug).orElse(null);
     }
 }
