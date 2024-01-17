@@ -46,7 +46,10 @@ public class NewsService {
 
             for (SyndEntry entry : syndFeed.getEntries()) {
                 String guid = entry.getUri();
-                Long extractedNumber = extractNumberFromGuid(guid);
+
+                if (newsRepository.findByGuid(guid).isPresent()) {
+                    continue;
+                }
 
                 String webMaster = syndFeed.getWebMaster();
                 String regex = "\\((.*?)\\)";
@@ -57,12 +60,12 @@ public class NewsService {
                 String slug = generateSlug(entry.getTitle());
 
                 News news = new News();
-                news.setId(extractedNumber);
                 news.setAuthor(webMaster);
                 news.setTitle(entry.getTitle());
                 news.setLink(entry.getLink());
                 news.setDescription(entry.getDescription().getValue());
                 news.setSlug(slug);
+                news.setGuid(guid);
 
                 if (matcher.find()) {
                     news.setAuthor(matcher.group(1));
@@ -98,18 +101,6 @@ public class NewsService {
     private String generateSlug(String input) {
         String normalizedInput = input.trim().toLowerCase().replaceAll("\\s+", "-");
         return normalizedInput.replaceAll("[^a-z0-9-]", "");
-    }
-
-    private Long extractNumberFromGuid(String guid) {
-        String[] parts = guid.split("-");
-        if (parts.length > 0) {
-            try {
-                return Long.parseLong(parts[parts.length - 1]);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
     }
 
     @Scheduled(fixedRate = 600000)

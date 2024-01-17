@@ -13,4 +13,6 @@ public interface NewsRepository extends JpaRepository<News, Long> {
             String key2);
 
     Optional<News> findBySlug(String slug);
+
+    Optional<News> findByGuid(String guid);
 }
