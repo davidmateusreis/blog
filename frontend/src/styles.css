@@ -42,3 +42,7 @@ body.dark-mode textarea {
 body.dark-mode svg path {
     fill: #fff;
 }
+
+body.dark-mode .no-results-message {
+    color: #fff;
+}
