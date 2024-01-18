@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NewsPage } from 'src/app/models/news-page.model';
 import { News } from 'src/app/models/news.model';
 import { YourNintendoNewsService } from 'src/app/services/your-nintendo-news.service';
@@ -20,11 +20,15 @@ export class YourNintendoNewsNewsComponent implements OnInit {
 
   constructor(
     private yourNintendoNewsService: YourNintendoNewsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.loadNews();
+    this.route.params.subscribe(params => {
+      this.currentPage = +params['pageNumber'] - 1 || 0;
+      this.loadNews();
+    });
   }
 
   loadNews(): void {
@@ -95,5 +99,6 @@ export class YourNintendoNewsNewsComponent implements OnInit {
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
     this.loadNews();
+    this.router.navigate(['/page', newPage + 1]);
   }
 }

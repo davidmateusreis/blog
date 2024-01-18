@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-your-nintendo-news-paginator',
@@ -11,9 +12,12 @@ export class YourNintendoNewsPaginatorComponent {
   @Input() totalPages: number = 1;
   @Output() pageChange = new EventEmitter<number>();
 
+  constructor(private router: Router) { }
+
   onPageChange(newPage: number): void {
     if (newPage >= 0 && newPage < this.totalPages) {
       this.pageChange.emit(newPage);
+      this.router.navigate(['/page', newPage + 1]);
     }
   }
 

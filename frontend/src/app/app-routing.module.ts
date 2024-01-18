@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'about', component: YourNintendoNewsAboutComponent },
   { path: 'news/:year/:month/:slug', component: YourNintendoNewsNewsDetailsComponent },
   { path: 'terms', component: YourNintendoNewsTermsComponent },
-  { path: 'privacy', component: YourNintendoNewsPrivacyComponent }
+  { path: 'privacy', component: YourNintendoNewsPrivacyComponent },
+  { path: 'page/:pageNumber', component: YourNintendoNewsNewsComponent }
 ];
 
 @NgModule({
