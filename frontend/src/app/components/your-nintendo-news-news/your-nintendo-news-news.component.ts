@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NewsPage } from 'src/app/models/news-page.model';
 import { News } from 'src/app/models/news.model';
 import { YourNintendoNewsService } from 'src/app/services/your-nintendo-news.service';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-your-nintendo-news-news',
@@ -18,6 +20,8 @@ export class YourNintendoNewsNewsComponent implements OnInit {
 
   @Output() searchEvent = new EventEmitter<string>();
 
+  private searchSubject = new Subject<void>();
+
   constructor(
     private yourNintendoNewsService: YourNintendoNewsService,
     private router: Router,
@@ -29,6 +33,14 @@ export class YourNintendoNewsNewsComponent implements OnInit {
       this.currentPage = +params['pageNumber'] - 1 || 0;
       this.loadNews();
     });
+
+    this.searchSubject.pipe(debounceTime(300)).subscribe(() => {
+      this.performSearch();
+    });
+  }
+
+  onSearchInputChange(): void {
+    this.searchSubject.next();
   }
 
   loadNews(): void {
