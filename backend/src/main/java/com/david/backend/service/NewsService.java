@@ -1,6 +1,6 @@
 package com.david.backend.service;
 
-import com.david.backend.dtos.NewsPageDto;
+import com.david.backend.dto.NewsPageDto;
 import com.david.backend.entity.News;
 import com.david.backend.repository.NewsRepository;
 import com.rometools.fetcher.FeedFetcher;
@@ -11,6 +11,7 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,9 +21,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Service
 public class NewsService {
@@ -38,7 +39,6 @@ public class NewsService {
     public void fetchAndSaveNewsFromRSS(String rssFeedUrl) {
         try {
             FeedFetcher feedFetcher = new HttpURLFeedFetcher();
-
             URL feedUrl = new URL(rssFeedUrl);
             SyndFeed syndFeed = feedFetcher.retrieveFeed(feedUrl);
 
@@ -73,8 +73,8 @@ public class NewsService {
 
                 List<Element> contentElements = entry.getForeignMarkup();
                 for (Element element : contentElements) {
-                    if ("content".equals(element.getName())
-                            && "http://search.yahoo.com/mrss/".equals(element.getNamespaceURI())) {
+                    if ("content".equals(element.getName()) &&
+                            "http://search.yahoo.com/mrss/".equals(element.getNamespaceURI())) {
                         if (element.getAttributes().size() > 0) {
                             news.setImageUrl(element.getAttributeValue("url"));
                             break;
@@ -91,10 +91,16 @@ public class NewsService {
                 newsList.add(news);
             }
 
-            newsRepository.saveAll(newsList);
+            if (!newsList.isEmpty()) {
+                newsRepository.saveAll(newsList);
+                System.out.println(newsList.size() + " news entries saved successfully from RSS: " + rssFeedUrl);
+            } else {
+                System.out.println("No new news entries to save from RSS: " + rssFeedUrl);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException("Error fetching and saving news from RSS: " + rssFeedUrl);
         }
     }
 
@@ -103,10 +109,15 @@ public class NewsService {
         return normalizedInput.replaceAll("[^a-z0-9-]", "");
     }
 
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedRate = 1200000)
     public void updateNewsFromRSS() {
-        for (String rssFeedUrl : RSS_FEED_URLS) {
-            fetchAndSaveNewsFromRSS(rssFeedUrl);
+        try {
+            for (String rssFeedUrl : RSS_FEED_URLS) {
+                fetchAndSaveNewsFromRSS(rssFeedUrl);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error updating news from RSS feeds");
         }
     }
 
@@ -114,33 +125,20 @@ public class NewsService {
         Page<News> newsPage;
 
         if (searchQuery != null && !searchQuery.isEmpty()) {
-            List<News> searchResult = newsRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(
-                    searchQuery,
-                    searchQuery);
-
-            List<News> sortedSearchResult = searchResult.stream()
-                    .sorted((n1, n2) -> n2.getPubDate().compareTo(n1.getPubDate()))
-                    .collect(Collectors.toList());
-
-            int startIndex = page * size;
-            int endIndex = Math.min(startIndex + size, sortedSearchResult.size());
-            List<News> paginatedResult = sortedSearchResult.subList(startIndex, endIndex);
-
-            return new NewsPageDto(paginatedResult, searchResult.size(),
-                    calculateTotalPages(searchResult.size(), size));
+            newsPage = new PageImpl<>(newsRepository
+                    .findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(searchQuery, searchQuery));
         } else {
             newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
         }
 
-        List<News> newsList = newsPage.get().collect(Collectors.toList());
-        return new NewsPageDto(newsList, newsPage.getTotalElements(), newsPage.getTotalPages());
-    }
-
-    private int calculateTotalPages(int totalItems, int pageSize) {
-        return (int) Math.ceil((double) totalItems / pageSize);
+        return new NewsPageDto(
+                newsPage.getContent(),
+                newsPage.getTotalElements(),
+                newsPage.getTotalPages());
     }
 
     public News getNewsDetailsBySlug(String slug) {
-        return newsRepository.findBySlug(slug).orElse(null);
+        return newsRepository.findBySlug(slug)
+                .orElseThrow(() -> new NoSuchElementException("News not found for slug: " + slug));
     }
 }

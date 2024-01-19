@@ -1,4 +1,4 @@
-package com.david.backend.dtos;
+package com.david.backend.dto;
 
 import java.util.List;
 
