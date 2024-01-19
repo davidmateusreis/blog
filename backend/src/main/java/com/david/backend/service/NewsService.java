@@ -3,10 +3,10 @@ package com.david.backend.service;
 import com.david.backend.dto.NewsPageDto;
 import com.david.backend.entity.News;
 import com.david.backend.repository.NewsRepository;
-import com.rometools.fetcher.FeedFetcher;
-import com.rometools.fetcher.impl.HttpURLFeedFetcher;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.SyndFeedInput;
+import com.rometools.rome.io.XmlReader;
 
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +37,20 @@ public class NewsService {
 
     public void fetchAndSaveNewsFromRSS(String rssFeedUrl) {
         try {
-            FeedFetcher feedFetcher = new HttpURLFeedFetcher();
+            SyndFeedInput input = new SyndFeedInput();
             URL feedUrl = new URL(rssFeedUrl);
-            SyndFeed syndFeed = feedFetcher.retrieveFeed(feedUrl);
+            SyndFeed feed = input.build(new XmlReader(feedUrl));
 
             List<News> newsList = new ArrayList<>();
 
-            for (SyndEntry entry : syndFeed.getEntries()) {
+            for (SyndEntry entry : feed.getEntries()) {
                 String guid = entry.getUri();
 
                 if (newsRepository.findByGuid(guid).isPresent()) {
                     continue;
                 }
 
-                String webMaster = syndFeed.getWebMaster();
+                String webMaster = feed.getWebMaster();
                 String regex = "\\((.*?)\\)";
 
                 Pattern pattern = Pattern.compile(regex);
