@@ -11,7 +11,6 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -125,8 +124,10 @@ public class NewsService {
         Page<News> newsPage;
 
         if (searchQuery != null && !searchQuery.isEmpty()) {
-            newsPage = new PageImpl<>(newsRepository
-                    .findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(searchQuery, searchQuery));
+            newsPage = newsRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(
+                    searchQuery,
+                    searchQuery,
+                    PageRequest.of(page, size, Sort.by("pubDate").descending()));
         } else {
             newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
         }
