@@ -59,7 +59,7 @@ public class NewsService {
                 String slug = generateSlug(entry.getTitle());
 
                 News news = new News();
-                news.setAuthor(webMaster);
+                news.setSource(webMaster);
                 news.setTitle(entry.getTitle());
                 news.setLink(entry.getLink());
                 news.setDescription(entry.getDescription().getValue());
@@ -67,7 +67,7 @@ public class NewsService {
                 news.setGuid(guid);
 
                 if (matcher.find()) {
-                    news.setAuthor(matcher.group(1));
+                    news.setSource(matcher.group(1));
                 }
 
                 List<Element> contentElements = entry.getForeignMarkup();

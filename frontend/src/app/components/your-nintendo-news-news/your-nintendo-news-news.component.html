@@ -9,8 +9,8 @@
         <div *ngFor="let news of newsPage.news" class="news-item">
             <img class="news-image" (click)="showNewsDetails(news)" [src]="news.imageUrl" alt="News Image">
             <h2 class="news-title" (click)="showNewsDetails(news)">{{ news.title }}</h2>
-            <p class="news-date">Posted on <a [href]="getAuthorLink(news.author)" target="_blank"
-                    [style.color]="getAuthorColor(news.author)">{{news.author}}</a> {{
+            <p class="news-date">Posted on <a [href]="getAuthorLink(news.source)" target="_blank"
+                    [style.color]="getAuthorColor(news.source)">{{news.source}}</a> {{
                 news.pubDate | dateAsAgo }}</p>
         </div>
     </div>
