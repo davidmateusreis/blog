@@ -2,26 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { News } from 'src/app/models/news.model';
-import { YourNintendoNewsService } from 'src/app/services/your-nintendo-news.service';
+import { NewsService } from 'src/app/services/news.service';
 
 @Component({
-  selector: 'app-your-nintendo-news-news-details',
-  templateUrl: './your-nintendo-news-news-details.component.html',
-  styleUrls: ['./your-nintendo-news-news-details.component.css']
+  selector: 'app-news-details',
+  templateUrl: './news-details.component.html',
+  styleUrls: ['./news-details.component.css']
 })
-export class YourNintendoNewsNewsDetailsComponent implements OnInit {
+export class NewsDetailsComponent implements OnInit {
 
   slug!: string;
   newsDetails$!: Observable<News>;
 
   constructor(
-    private yourNintendoNewsService: YourNintendoNewsService,
+    private newsService: NewsService,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.slug = this.activatedRoute.snapshot.paramMap.get('slug')!;
-    this.newsDetails$ = this.yourNintendoNewsService.getNewsDetailsBySlug(this.slug);
+    this.newsDetails$ = this.newsService.getNewsDetailsBySlug(this.slug);
   }
 
   getAuthorColor(author: string): string {

@@ -2,11 +2,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-your-nintendo-news-paginator',
-  templateUrl: './your-nintendo-news-paginator.component.html',
-  styleUrls: ['./your-nintendo-news-paginator.component.css']
+  selector: 'app-paginator',
+  templateUrl: './paginator.component.html',
+  styleUrls: ['./paginator.component.css']
 })
-export class YourNintendoNewsPaginatorComponent {
+export class PaginatorComponent {
 
   @Input() currentPage: number = 0;
   @Input() totalPages: number = 1;

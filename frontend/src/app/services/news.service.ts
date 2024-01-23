@@ -8,7 +8,7 @@ import { News } from '../models/news.model';
 @Injectable({
   providedIn: 'root'
 })
-export class YourNintendoNewsService {
+export class NewsService {
 
   private baseUrl = environment.apiUrl;
 

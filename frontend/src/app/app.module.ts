@@ -3,33 +3,33 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { YourNintendoNewsHeaderComponent } from './components/your-nintendo-news-header/your-nintendo-news-header.component';
-import { YourNintendoNewsNewsComponent } from './components/your-nintendo-news-news/your-nintendo-news-news.component';
-import { YourNintendoNewsFooterComponent } from './components/your-nintendo-news-footer/your-nintendo-news-footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { NewsComponent } from './components/news/news.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
-import { YourNintendoNewsPaginatorComponent } from './components/your-nintendo-news-paginator/your-nintendo-news-paginator.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { YourNintendoNewsContactComponent } from './components/your-nintendo-news-contact/your-nintendo-news-contact.component';
-import { YourNintendoNewsAboutComponent } from './components/your-nintendo-news-about/your-nintendo-news-about.component';
-import { YourNintendoNewsNewsDetailsComponent } from './components/your-nintendo-news-news-details/your-nintendo-news-news-details.component';
-import { YourNintendoNewsTermsComponent } from './components/your-nintendo-news-terms/your-nintendo-news-terms.component';
-import { YourNintendoNewsPrivacyComponent } from './components/your-nintendo-news-privacy/your-nintendo-news-privacy.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AboutComponent } from './components/about/about.component';
+import { NewsDetailsComponent } from './components/news-details/news-details.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 import { DisqusComponent } from './components/disqus/disqus.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    YourNintendoNewsHeaderComponent,
-    YourNintendoNewsNewsComponent,
-    YourNintendoNewsFooterComponent,
+    HeaderComponent,
+    NewsComponent,
+    FooterComponent,
     DateAsAgoPipe,
-    YourNintendoNewsPaginatorComponent,
-    YourNintendoNewsContactComponent,
-    YourNintendoNewsAboutComponent,
-    YourNintendoNewsNewsDetailsComponent,
-    YourNintendoNewsTermsComponent,
-    YourNintendoNewsPrivacyComponent,
+    PaginatorComponent,
+    ContactComponent,
+    AboutComponent,
+    NewsDetailsComponent,
+    TermsComponent,
+    PrivacyComponent,
     DisqusComponent
   ],
   imports: [

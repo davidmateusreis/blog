@@ -2,16 +2,16 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsPage } from 'src/app/models/news-page.model';
 import { News } from 'src/app/models/news.model';
-import { YourNintendoNewsService } from 'src/app/services/your-nintendo-news.service';
+import { NewsService } from 'src/app/services/news.service';
 import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-your-nintendo-news-news',
-  templateUrl: './your-nintendo-news-news.component.html',
-  styleUrls: ['./your-nintendo-news-news.component.css']
+  selector: 'app-news',
+  templateUrl: './news.component.html',
+  styleUrls: ['./news.component.css']
 })
-export class YourNintendoNewsNewsComponent implements OnInit {
+export class NewsComponent implements OnInit {
 
   newsPage: NewsPage = { news: [], totalElements: 0, totalPages: 0 };
   currentPage = 0;
@@ -23,7 +23,7 @@ export class YourNintendoNewsNewsComponent implements OnInit {
   private searchSubject = new Subject<void>();
 
   constructor(
-    private yourNintendoNewsService: YourNintendoNewsService,
+    private newsService: NewsService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -46,7 +46,7 @@ export class YourNintendoNewsNewsComponent implements OnInit {
   loadNews(): void {
     if (this.searchQuery.trim() !== '') {
 
-      this.yourNintendoNewsService.getNews(0, this.size, this.searchQuery)
+      this.newsService.getNews(0, this.size, this.searchQuery)
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
@@ -57,7 +57,7 @@ export class YourNintendoNewsNewsComponent implements OnInit {
         );
     } else {
 
-      this.yourNintendoNewsService.getNews(this.currentPage, this.size)
+      this.newsService.getNews(this.currentPage, this.size)
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
