@@ -22,6 +22,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/user/user.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -44,7 +45,8 @@ export function tokenGetter() {
     RegisterComponent,
     LoginComponent,
     AdminComponent,
-    UserComponent
+    UserComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

@@ -46,3 +46,7 @@ body.dark-mode svg path {
 body.dark-mode .no-results-message {
     color: #fff;
 }
+
+body.dark-mode .modal-container {
+    background-color: #333;
+}

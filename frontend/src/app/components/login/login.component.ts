@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   submitted = false;
 
+  modalMessage = '';
+  showModal = false;
+
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
@@ -33,23 +36,27 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(formData).subscribe(
         (response) => {
-          alert('Login successfully!');
-
-          const userRoles = this.authService.getUserRoles();
-
-          if (userRoles.includes('Admin')) {
-            this.router.navigate(['/admin']);
-          } else if (userRoles.includes('User')) {
-            this.router.navigate(['/user']);
-          } else {
-            this.router.navigate(['/']);
-          }
+          this.modalMessage = 'You logged successfully!';
+          this.showModal = true;
         },
         (error) => {
-          alert('Login failed!');
-          this.loginForm.reset();
+          this.modalMessage = 'Your login failed!';
+          this.showModal = true;
         }
       );
+    }
+  }
+
+  onCloseModal() {
+    const userRoles = this.authService.getUserRoles();
+
+    if (userRoles.includes('Admin')) {
+      this.router.navigate(['/admin']);
+    } else if (userRoles.includes('User')) {
+      this.router.navigate(['/user']);
+    } else {
+      this.loginForm.reset();
+      this.showModal = false;
     }
   }
 }
