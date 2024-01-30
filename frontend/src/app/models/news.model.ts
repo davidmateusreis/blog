@@ -1,9 +1,10 @@
 export interface News {
     id: number;
-    author: string;
+    source: string;
     title: string;
     description: string;
     link: string;
     imageUrl: string;
     pubDate: Date;
+    slug: String;
 }

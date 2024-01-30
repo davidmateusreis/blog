@@ -1,0 +1,49 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 1%;
+    max-width: 40%;
+    min-width: 768px;
+}
+
+.social-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1%;
+    min-width: 768px;
+    gap: 1%;
+}
+
+.social-container svg {
+    width: 24px;
+    color: #333;
+    transition: all 0.4s;
+}
+
+.social-container svg:hover {
+    transform: translateY(-5px);
+}
+
+h2 {
+    padding: 0.4%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+p {
+    text-align: center;
+    line-height: 1.4;
+}
+
+img {
+    margin: 2%;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}

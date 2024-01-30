@@ -1,0 +1,15 @@
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 1%;
+    max-width: 40%;
+    min-width: 768px;
+}
+
+h2 {
+    padding: 0.4%;
+    text-align: center;
+}

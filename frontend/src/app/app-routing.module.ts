@@ -1,27 +1,40 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { YourNintendoNewsNewsComponent } from './components/your-nintendo-news-news/your-nintendo-news-news.component';
-import { YourNintendoNewsContactComponent } from './components/your-nintendo-news-contact/your-nintendo-news-contact.component';
-import { YourNintendoNewsAboutComponent } from './components/your-nintendo-news-about/your-nintendo-news-about.component';
-import { YourNintendoNewsNewsDetailsComponent } from './components/your-nintendo-news-news-details/your-nintendo-news-news-details.component';
-import { YourNintendoNewsTermsComponent } from './components/your-nintendo-news-terms/your-nintendo-news-terms.component';
-import { YourNintendoNewsPrivacyComponent } from './components/your-nintendo-news-privacy/your-nintendo-news-privacy.component';
+import { NewsComponent } from './components/news/news.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AboutComponent } from './components/about/about.component';
+import { NewsDetailsComponent } from './components/news-details/news-details.component';
+import { TermsComponent } from './components/terms/terms.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './auth/auth.guard';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
-  { path: '', component: YourNintendoNewsNewsComponent },
-  { path: 'contact', component: YourNintendoNewsContactComponent },
-  { path: 'about', component: YourNintendoNewsAboutComponent },
-  { path: 'news/:id', component: YourNintendoNewsNewsDetailsComponent },
-  { path: 'terms', component: YourNintendoNewsTermsComponent },
-  { path: 'privacy', component: YourNintendoNewsPrivacyComponent }
+  { path: '', component: NewsComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'news/:year/:month/:slug', component: NewsDetailsComponent },
+  { path: 'terms', component: TermsComponent },
+  { path: 'privacy', component: PrivacyComponent },
+  { path: 'page/:pageNumber', component: NewsComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
+  { path: '**', redirectTo: '/page/1' }
 ];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    })
   ],
   exports: [RouterModule],
 })
