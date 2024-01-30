@@ -1,0 +1,38 @@
+<div class="login-container">
+    <div>
+        <h2>Login your account!</h2>
+    </div>
+    <form [formGroup]="loginForm" id="loginForm" (ngSubmit)="login()">
+        <div>
+            <input type="text" formControlName="username" id="username" placeholder="Your username" name="username"
+                [ngClass]="{'is-invalid':submitted && loginForm.get('username')?.errors, 'is-valid':loginForm.get('username')?.valid}"
+                required>
+            <div *ngIf="loginForm.get('username')?.dirty && loginForm.get('username')?.hasError('required')"
+                class="invalid-feedback">Please
+                enter
+                your username!</div>
+            <div *ngIf="loginForm.get('username')?.hasError('minlength')" class="invalid-feedback">The username
+                should be a least 4 characters!</div>
+            <div *ngIf="loginForm.get('username')?.valid" class="valid-feedback">This username is valid!</div>
+        </div>
+
+        <div>
+            <input type="password" formControlName="password" id="password" placeholder="Your password" name="password"
+                [ngClass]="{'is-invalid':submitted && loginForm.get('password')?.errors, 'is-valid':loginForm.get('password')?.valid}"
+                required>
+            <div *ngIf="loginForm.get('password')?.dirty && loginForm.get('password')?.hasError('required')"
+                class="invalid-feedback">Please
+                enter
+                your password!</div>
+            <div *ngIf="loginForm.get('password')?.hasError('minlength')" class="invalid-feedback">The password
+                should be a least 8 characters!</div>
+            <div *ngIf="loginForm.get('password')?.valid" class="valid-feedback">This password is valid!</div>
+        </div>
+        <div>
+            <button>Login</button>
+        </div>
+    </form>
+    <div class="create-account-link">
+        <a routerLink="/register">Don't have an account? Create a new one!</a>
+    </div>
+</div>

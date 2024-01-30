@@ -18,6 +18,10 @@
             <li><a routerLink="/about" class="nav-link">About</a></li>
             <li><a routerLink="/terms" class="nav-link">Terms</a></li>
             <li><a routerLink="/privacy" class="nav-link">Privacy</a></li>
+            <li *ngIf="isLoggedIn() && hasAdminRole()"><a routerLink="/admin" class="nav-link">Admin</a></li>
+            <li *ngIf="isLoggedIn() && hasUserRole()"><a routerLink="/user" class="nav-link">User</a></li>
+            <li *ngIf="!isLoggedIn()"><a routerLink="/login" class="nav-link">Login</a></li>
+            <li *ngIf="isLoggedIn()"><a routerLink="/login" class="nav-link" (click)="logout()">Logout</a></li>
         </ul>
         <ul>
             <li>

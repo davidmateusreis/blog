@@ -16,6 +16,16 @@ import { NewsDetailsComponent } from './components/news-details/news-details.com
 import { TermsComponent } from './components/terms/terms.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { DisqusComponent } from './components/disqus/disqus.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from '../environments/environment';
+import { AdminComponent } from './components/admin/admin.component';
+import { UserComponent } from './components/user/user.component';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -30,14 +40,25 @@ import { DisqusComponent } from './components/disqus/disqus.component';
     NewsDetailsComponent,
     TermsComponent,
     PrivacyComponent,
-    DisqusComponent
+    DisqusComponent,
+    RegisterComponent,
+    LoginComponent,
+    AdminComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: [environment.apiUrl],
+        disallowedRoutes: [`${environment.apiUrl}/login`],
+      },
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
