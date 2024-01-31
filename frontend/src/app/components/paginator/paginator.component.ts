@@ -17,7 +17,7 @@ export class PaginatorComponent {
   onPageChange(newPage: number): void {
     if (newPage >= 0 && newPage < this.totalPages) {
       this.pageChange.emit(newPage);
-      this.router.navigate(['/page', newPage + 1]);
+      this.router.navigate(['/news/page', newPage + 1]);
     }
   }
 
