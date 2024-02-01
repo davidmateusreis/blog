@@ -18,6 +18,8 @@ export class NewsComponent implements OnInit {
   size = 12;
   searchQuery: string = '';
 
+  loading: boolean = false;
+
   @Output() searchEvent = new EventEmitter<string>();
 
   private searchSubject = new Subject<void>();
@@ -44,15 +46,19 @@ export class NewsComponent implements OnInit {
   }
 
   loadNews(): void {
+    this.loading = true;
+
     if (this.searchQuery.trim() !== '') {
 
       this.newsService.getNews(0, this.size, this.searchQuery)
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
+            this.loading = false;
           },
           error => {
             console.log('Error loading news:', error);
+            this.loading = false;
           }
         );
     } else {
@@ -61,9 +67,11 @@ export class NewsComponent implements OnInit {
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
+            this.loading = false;
           },
           error => {
             console.log('Error loading news:', error);
+            this.loading = false;
           }
         );
     }

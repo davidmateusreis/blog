@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/user/user.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -46,7 +47,8 @@ export function tokenGetter() {
     LoginComponent,
     AdminComponent,
     UserComponent,
-    ModalComponent
+    ModalComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
