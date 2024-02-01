@@ -10,6 +10,8 @@ import com.rometools.rome.io.XmlReader;
 
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -109,6 +111,7 @@ public class NewsService {
     }
 
     @Scheduled(fixedRate = 1200000)
+    @CacheEvict("allNews")
     public void updateNewsFromRSS() {
         try {
             for (String rssFeedUrl : RSS_FEED_URLS) {
@@ -120,6 +123,7 @@ public class NewsService {
         }
     }
 
+    @Cacheable("allNews")
     public NewsPageDto getAllNews(int page, int size, String searchQuery) {
         Page<News> newsPage;
 
@@ -138,6 +142,7 @@ public class NewsService {
                 newsPage.getTotalPages());
     }
 
+    @Cacheable(value = "newsDetails", key = "#slug")
     public News getNewsDetailsBySlug(String slug) {
         return newsRepository.findBySlug(slug)
                 .orElseThrow(() -> new NoSuchElementException("News not found for slug: " + slug));
