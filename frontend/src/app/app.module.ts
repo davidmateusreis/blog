@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { NewsComponent } from './components/news/news.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
+import { DateAsAgoPipe } from './pipes/date-as-ago.pipe';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
