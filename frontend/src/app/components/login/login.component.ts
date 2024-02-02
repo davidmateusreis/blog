@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   modalMessage = '';
   showModal = false;
 
+  loading: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.submitted = true;
+      this.loading = true;
 
       const formData = this.loginForm.value;
 
@@ -43,7 +46,9 @@ export class LoginComponent implements OnInit {
           this.modalMessage = 'Your login failed!';
           this.showModal = true;
         }
-      );
+      ).add(() => {
+        this.loading = false;
+      });
     }
   }
 

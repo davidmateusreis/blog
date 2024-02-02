@@ -19,6 +19,8 @@ export class ContactComponent implements OnInit {
   modalMessage = '';
   showModal = false;
 
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
@@ -38,6 +40,7 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.valid) {
 
       this.submitted = true;
+      this.loading = true;
 
       const formData = this.contactForm.value;
 
@@ -50,7 +53,9 @@ export class ContactComponent implements OnInit {
           this.modalMessage = 'Error sending your message!';
           this.showModal = true;
         }
-      );
+      ).add(() => {
+        this.loading = false;
+      });
     }
   }
 
