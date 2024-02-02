@@ -15,11 +15,8 @@ import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/news', pathMatch: 'full' },
-  {
-    path: 'news', component: NewsComponent, children: [
-      { path: 'page/:pageNumber', component: NewsComponent },
-    ]
-  },
+  { path: 'news', component: NewsComponent },
+  { path: 'news/page/:pageNumber', component: NewsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
   { path: 'news/:year/:month/:slug', component: NewsDetailsComponent },
