@@ -22,3 +22,6 @@
     </div>
 </div>
 <app-loader [loading]="loading"></app-loader>
+<div *ngIf="apiError" class="no-news-message">
+    Sorry, an error occurred while loading news. Please try again later.
+</div>
