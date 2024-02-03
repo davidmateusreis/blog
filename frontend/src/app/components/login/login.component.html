@@ -36,5 +36,5 @@
         <a routerLink="/register">Don't have an account? Create a new one!</a>
     </div>
 </div>
-<app-modal *ngIf="showModal" [message]="modalMessage" (closeModal)="onCloseModal()"></app-modal>
+<app-modal *ngIf="showModal" [modalTitle]="'Login'" [message]="modalMessage" (closeModal)="onCloseModal()"></app-modal>
 <app-loader [loading]="loading"></app-loader>
