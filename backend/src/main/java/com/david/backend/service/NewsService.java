@@ -136,10 +136,14 @@ public class NewsService {
             newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
         }
 
-        return new NewsPageDto(
-                newsPage.getContent(),
-                newsPage.getTotalElements(),
-                newsPage.getTotalPages());
+        if (page >= 0 && page < newsPage.getTotalPages()) {
+            return new NewsPageDto(
+                    newsPage.getContent(),
+                    newsPage.getTotalElements(),
+                    newsPage.getTotalPages());
+        } else {
+            throw new IllegalArgumentException("Invalid page number requested");
+        }
     }
 
     @Cacheable(value = "newsDetails", key = "#slug")
