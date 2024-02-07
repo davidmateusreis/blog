@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.david.backend.dto.JwtAuthResquest;
+import com.david.backend.dto.JwtAuthRequest;
 import com.david.backend.security.JwtTokenProvider;
 
 @Service
@@ -18,11 +18,11 @@ public class AuthService {
 
     private JwtTokenProvider jwtTokenProvider;
 
-    public String login(JwtAuthResquest jwtAuthResquest) {
+    public String login(JwtAuthRequest jwtAuthRequest) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                jwtAuthResquest.getUsername(),
-                jwtAuthResquest.getPassword()));
+                jwtAuthRequest.getUsername(),
+                jwtAuthRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

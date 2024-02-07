@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.david.backend.dto.JwtAuthResponse;
-import com.david.backend.dto.JwtAuthResquest;
+import com.david.backend.dto.JwtAuthRequest;
 import com.david.backend.service.AuthService;
 
 import jakarta.validation.Valid;
@@ -23,8 +23,8 @@ public class AuthController {
 
     @CrossOrigin(origins = { "http://localhost:4200" })
     @PostMapping
-    public ResponseEntity<JwtAuthResponse> login(@Valid @RequestBody JwtAuthResquest jwtAuthResquest) {
-        String token = authService.login(jwtAuthResquest);
+    public ResponseEntity<JwtAuthResponse> login(@Valid @RequestBody JwtAuthRequest jwtAuthRequest) {
+        String token = authService.login(jwtAuthRequest);
 
         JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
         jwtAuthResponse.setAccessToken(token);
