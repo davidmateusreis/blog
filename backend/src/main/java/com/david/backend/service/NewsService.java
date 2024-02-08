@@ -2,6 +2,8 @@ package com.david.backend.service;
 
 import com.david.backend.dto.NewsPageDto;
 import com.david.backend.entity.News;
+import com.david.backend.exception.InvalidPageNumberException;
+import com.david.backend.exception.NewsNotFoundException;
 import com.david.backend.repository.NewsRepository;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -22,7 +24,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -142,13 +143,13 @@ public class NewsService {
                     newsPage.getTotalElements(),
                     newsPage.getTotalPages());
         } else {
-            throw new IllegalArgumentException("Invalid page number requested");
+            throw new InvalidPageNumberException("The page number you requested not exists");
         }
     }
 
     @Cacheable(value = "newsDetails", key = "#slug")
     public News getNewsDetailsBySlug(String slug) {
         return newsRepository.findBySlug(slug)
-                .orElseThrow(() -> new NoSuchElementException("News not found for slug: " + slug));
+                .orElseThrow(() -> new NewsNotFoundException("News not found for slug: " + slug));
     }
 }

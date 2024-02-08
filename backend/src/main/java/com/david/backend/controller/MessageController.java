@@ -1,8 +1,12 @@
 package com.david.backend.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.david.backend.entity.Message;
+import com.david.backend.exception.ErrorResponse;
 import com.david.backend.service.MessageService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/contact")
@@ -21,13 +28,15 @@ public class MessageController {
 
     @CrossOrigin(origins = { "http://localhost:4200" })
     @PostMapping
-    public ResponseEntity<Message> send(@RequestBody Message message) {
-        try {
-            Message sentMessage = messageService.sendMessage(message);
-            return new ResponseEntity<>(sentMessage, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<?> send(@Valid @RequestBody Message message, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<ErrorResponse> errors = bindingResult.getFieldErrors().stream()
+                    .map(error -> new ErrorResponse(error.getField(), error.getDefaultMessage()))
+                    .collect(Collectors.toList());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
+
+        Message sentMessage = messageService.sendMessage(message);
+        return new ResponseEntity<>(sentMessage, HttpStatus.OK);
     }
 }

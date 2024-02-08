@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.david.backend.entity.Role;
 import com.david.backend.entity.User;
+import com.david.backend.exception.UsernameAlreadyExistsException;
 import com.david.backend.repository.RoleRepository;
 import com.david.backend.repository.UserRepository;
 
@@ -56,7 +57,7 @@ public class UserService {
 
     public User registerNewUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new IllegalArgumentException("Username already exists");
+            throw new UsernameAlreadyExistsException("This username already exists");
         }
 
         Role role = roleRepository.findById("User").get();
