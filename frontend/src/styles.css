@@ -59,3 +59,15 @@ body.dark-mode .loader {
 body.dark-mode .no-news-message {
     color: #fff;
 }
+
+body.dark-mode th {
+    background-color: #444;
+}
+
+body.dark-mode tr:hover {
+    background-color: #444;
+}
+
+body.dark-mode input[type="checkbox"] {
+    background-color: #333;
+}

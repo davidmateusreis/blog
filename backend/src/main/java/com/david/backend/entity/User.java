@@ -40,4 +40,6 @@ public class User {
             @JoinColumn(name = "ROLE_ID")
     })
     private Set<Role> role;
+    @Column(nullable = false)
+    private boolean active;
 }
