@@ -10,32 +10,44 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NewsNotFoundException.class)
-    public ResponseEntity<String> handleNewsNotFoundException(NewsNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    public ResponseEntity<ErrorResponse> handleNewsNotFoundException(NewsNotFoundException e) {
+        ErrorResponse newsNotFoundException = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(newsNotFoundException);
     }
 
     @ExceptionHandler(InvalidPageNumberException.class)
-    public ResponseEntity<String> handleInvalidPageNumberException(InvalidPageNumberException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    }
-
-    @ExceptionHandler(InvalidLoginException.class)
-    public ResponseEntity<String> handleInvalidLoginException(InvalidLoginException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+    public ResponseEntity<ErrorResponse> handleInvalidPageNumberException(InvalidPageNumberException e) {
+        ErrorResponse invalidPageNumberException = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(invalidPageNumberException);
     }
 
     @ExceptionHandler(UsernameNotExistsException.class)
-    public ResponseEntity<String> handleUsernameNotExistsException(UsernameNotExistsException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    public ResponseEntity<ErrorResponse> handleUsernameNotExistsException(UsernameNotExistsException e) {
+        ErrorResponse usernameNotExistsResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(usernameNotExistsResponse);
     }
 
     @ExceptionHandler(UsernameAlreadyExistsException.class)
-    public ResponseEntity<String> handleUsernameAlreadyExistsException(UsernameAlreadyExistsException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    public ResponseEntity<ErrorResponse> handleUsernameAlreadyExistsException(UsernameAlreadyExistsException e) {
+        ErrorResponse usernameAlreadyExistsResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(usernameAlreadyExistsResponse);
     }
 
     @ExceptionHandler(ContactMessageException.class)
-    public ResponseEntity<String> handleContactMessageException(ContactMessageException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    public ResponseEntity<ErrorResponse> handleContactMessageException(ContactMessageException e) {
+        ErrorResponse contactMessageResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(contactMessageResponse);
+    }
+
+    @ExceptionHandler(UserNotActiveException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotActiveException(UserNotActiveException e) {
+        ErrorResponse userNotActiveResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(userNotActiveResponse);
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidPasswordException(InvalidPasswordException e) {
+        ErrorResponse invalidPasswordResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(invalidPasswordResponse);
     }
 }

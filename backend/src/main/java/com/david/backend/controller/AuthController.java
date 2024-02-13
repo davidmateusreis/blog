@@ -31,7 +31,7 @@ public class AuthController {
     public ResponseEntity<?> login(@Valid @RequestBody JwtAuthRequest jwtAuthRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<ErrorResponse> errors = bindingResult.getFieldErrors().stream()
-                    .map(error -> new ErrorResponse(error.getField(), error.getDefaultMessage()))
+                    .map(error -> new ErrorResponse(error.getDefaultMessage()))
                     .collect(Collectors.toList());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }

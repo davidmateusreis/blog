@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
           this.showModal = true;
         },
         (error) => {
-          this.modalMessage = 'Your login failed!';
+          this.modalMessage = error.error.message;
           this.showModal = true;
         }
       ).add(() => {

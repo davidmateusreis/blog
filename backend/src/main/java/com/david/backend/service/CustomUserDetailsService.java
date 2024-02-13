@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import com.david.backend.entity.User;
+import com.david.backend.exception.UserNotActiveException;
 import com.david.backend.exception.UsernameNotExistsException;
 import com.david.backend.repository.UserRepository;
 
@@ -25,7 +26,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         public UserDetails loadUserByUsername(String username) {
 
                 User user = userRepository.findByUsername(username)
-                                .orElseThrow(() -> new UsernameNotExistsException("This username not exists"));
+                                .orElseThrow(() -> new UsernameNotExistsException("Your username not exists!"));
+
+                if (!user.isActive()) {
+                        throw new UserNotActiveException("Your username is inactive!");
+                }
 
                 Set<GrantedAuthority> authorities = user.getRole().stream()
                                 .map((role) -> new SimpleGrantedAuthority(role.getName()))

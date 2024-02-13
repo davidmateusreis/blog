@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
           this.showModal = true;
         },
         (error) => {
-          this.modalMessage = 'Error creating a new account!';
+          this.modalMessage = error.error.message;
           this.showModal = true;
           this.registerForm.reset();
         }
