@@ -16,6 +16,11 @@ export class ContactComponent implements OnInit {
   contactForm!: FormGroup;
   submitted = false;
 
+  modalMessage = '';
+  showModal = false;
+
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
@@ -35,18 +40,26 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.valid) {
 
       this.submitted = true;
+      this.loading = true;
 
       const formData = this.contactForm.value;
 
       this.httpClient.post(`${this.baseUrl + '/contact'}`, formData).subscribe(
         response => {
-          alert('Thanks for your feedback and support!');
-          this.router.navigate(['/']);
+          this.modalMessage = 'Thanks for your feedback and support!';
+          this.showModal = true;
         },
         error => {
-          alert('Error sending message!');
+          this.modalMessage = 'Error sending your message!';
+          this.showModal = true;
         }
-      );
+      ).add(() => {
+        this.loading = false;
+      });
     }
+  }
+
+  onCloseModal() {
+    this.router.navigate(['/']);
   }
 }

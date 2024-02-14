@@ -14,6 +14,8 @@ export class NewsDetailsComponent implements OnInit {
   slug!: string;
   newsDetails$!: Observable<News>;
 
+  loading: boolean = true;
+
   constructor(
     private newsService: NewsService,
     private activatedRoute: ActivatedRoute
@@ -22,6 +24,16 @@ export class NewsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.slug = this.activatedRoute.snapshot.paramMap.get('slug')!;
     this.newsDetails$ = this.newsService.getNewsDetailsBySlug(this.slug);
+
+    this.newsDetails$.subscribe(
+      (newsDetails: News) => {
+        this.loading = false;
+      },
+      error => {
+        console.error('Error loading news details:');
+        this.loading = false;
+      }
+    );
   }
 
   getAuthorColor(author: string): string {

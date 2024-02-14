@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { NewsComponent } from './components/news/news.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { DateAsAgoPipe } from './shared/date-as-ago.pipe';
+import { DateAsAgoPipe } from './pipes/date-as-ago.pipe';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/user/user.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -46,7 +47,8 @@ export function tokenGetter() {
     LoginComponent,
     AdminComponent,
     UserComponent,
-    ModalComponent
+    ModalComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

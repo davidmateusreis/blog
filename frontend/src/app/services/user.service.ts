@@ -14,6 +14,14 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
 
   registerNewUser(user: User): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/register`, user);
+    return this.httpClient.post(`${this.baseUrl}/users/register`, user);
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.baseUrl}/users`);
+  }
+
+  updateUserStatus(username: string): Observable<User> {
+    return this.httpClient.put<User>(`${this.baseUrl}/users/${username}/status`, {});
   }
 }

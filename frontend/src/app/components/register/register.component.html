@@ -62,3 +62,5 @@
         <a routerLink="/login">Already have an account? So, login using it!</a>
     </div>
 </div>
+<app-modal *ngIf="showModal" [modalTitle]="'Register'" [message]="modalMessage" (closeModal)="onCloseModal()"></app-modal>
+<app-loader [loading]="loading"></app-loader>

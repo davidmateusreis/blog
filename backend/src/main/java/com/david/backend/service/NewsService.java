@@ -2,6 +2,8 @@ package com.david.backend.service;
 
 import com.david.backend.dto.NewsPageDto;
 import com.david.backend.entity.News;
+import com.david.backend.exception.InvalidPageNumberException;
+import com.david.backend.exception.NewsNotFoundException;
 import com.david.backend.repository.NewsRepository;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -10,6 +12,8 @@ import com.rometools.rome.io.XmlReader;
 
 import org.jdom2.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,7 +24,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -109,6 +112,7 @@ public class NewsService {
     }
 
     @Scheduled(fixedRate = 1200000)
+    @CacheEvict("allNews")
     public void updateNewsFromRSS() {
         try {
             for (String rssFeedUrl : RSS_FEED_URLS) {
@@ -120,6 +124,7 @@ public class NewsService {
         }
     }
 
+    @Cacheable("allNews")
     public NewsPageDto getAllNews(int page, int size, String searchQuery) {
         Page<News> newsPage;
 
@@ -132,14 +137,19 @@ public class NewsService {
             newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
         }
 
-        return new NewsPageDto(
-                newsPage.getContent(),
-                newsPage.getTotalElements(),
-                newsPage.getTotalPages());
+        if (page >= 0 && page < newsPage.getTotalPages()) {
+            return new NewsPageDto(
+                    newsPage.getContent(),
+                    newsPage.getTotalElements(),
+                    newsPage.getTotalPages());
+        } else {
+            throw new InvalidPageNumberException("The page number you requested not exists");
+        }
     }
 
+    @Cacheable(value = "newsDetails", key = "#slug")
     public News getNewsDetailsBySlug(String slug) {
         return newsRepository.findBySlug(slug)
-                .orElseThrow(() -> new NoSuchElementException("News not found for slug: " + slug));
+                .orElseThrow(() -> new NewsNotFoundException("News not found for slug: " + slug));
     }
 }

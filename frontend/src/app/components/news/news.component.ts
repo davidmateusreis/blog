@@ -18,6 +18,9 @@ export class NewsComponent implements OnInit {
   size = 12;
   searchQuery: string = '';
 
+  loading: boolean = false;
+  apiError: boolean = false;
+
   @Output() searchEvent = new EventEmitter<string>();
 
   private searchSubject = new Subject<void>();
@@ -44,15 +47,19 @@ export class NewsComponent implements OnInit {
   }
 
   loadNews(): void {
+    this.loading = true;
+
     if (this.searchQuery.trim() !== '') {
 
       this.newsService.getNews(0, this.size, this.searchQuery)
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
+            this.loading = false;
           },
           error => {
-            console.log('Error loading news:', error);
+            this.loading = false;
+            this.showErrorMessage();
           }
         );
     } else {
@@ -61,9 +68,11 @@ export class NewsComponent implements OnInit {
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
+            this.loading = false;
           },
           error => {
-            console.log('Error loading news:', error);
+            this.loading = false;
+            this.showErrorMessage();
           }
         );
     }
@@ -112,5 +121,10 @@ export class NewsComponent implements OnInit {
     this.currentPage = newPage;
     this.loadNews();
     this.router.navigate(['/page', newPage + 1]);
+  }
+
+  showErrorMessage(): void {
+    this.apiError = true;
+
   }
 }

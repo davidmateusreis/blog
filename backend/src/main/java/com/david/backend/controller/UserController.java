@@ -1,23 +1,31 @@
 package com.david.backend.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.david.backend.entity.User;
+import com.david.backend.exception.ErrorResponse;
 import com.david.backend.service.UserService;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/register")
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
@@ -29,17 +37,30 @@ public class UserController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" })
-    @PostMapping
+    @PostMapping("/users/register")
     public ResponseEntity<?> registerNewUser(@Valid @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body("Invalid input data");
+            List<ErrorResponse> errors = bindingResult.getFieldErrors().stream()
+                    .map(error -> new ErrorResponse(error.getDefaultMessage()))
+                    .collect(Collectors.toList());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
-        try {
-            User registeredUser = userService.registerNewUser(user);
-            return ResponseEntity.ok(registeredUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error registering user");
-        }
+        User registeredUser = userService.registerNewUser(user);
+        return new ResponseEntity<>(registeredUser, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" })
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" })
+    @PutMapping("/users/{username}/status")
+    public ResponseEntity<User> updateUserStatus(@PathVariable @NonNull String username) {
+        User updatedUser = userService.updateUserStatus(username);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 }

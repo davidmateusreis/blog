@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,9 +9,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  users: User[] = [];
+
+  loading: boolean = false;
+  apiError: boolean = false;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.loadUsers();
   }
 
+  loadUsers(): void {
+    this.loading = true;
+
+    this.userService.getAllUsers().subscribe(
+      (response: User[]) => {
+        this.users = response;
+        this.loading = false;
+      },
+      error => {
+        console.error('Error fetching users:', error);
+        this.loading = false;
+        this.showErrorMessage();
+      }
+    );
+  }
+
+  updateUserStatus(username: string): void {
+    this.userService.updateUserStatus(username).subscribe(
+      (updatedUser: User) => {
+      },
+      (error) => {
+        console.error('Error toggling user status:', error);
+      }
+    );
+  }
+
+  showErrorMessage(): void {
+    this.apiError = true;
+  }
 }

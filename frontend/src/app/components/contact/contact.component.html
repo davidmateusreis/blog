@@ -50,3 +50,5 @@
         </div>
     </form>
 </div>
+<app-modal *ngIf="showModal" [modalTitle]="'Contact'" [message]="modalMessage" (closeModal)="onCloseModal()"></app-modal>
+<app-loader [loading]="loading"></app-loader>

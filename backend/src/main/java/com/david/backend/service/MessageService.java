@@ -15,12 +15,7 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public Message sendMessage(@NonNull Message message) {
-        try {
-            return messageRepository.save(message);
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error saving message to the database");
-        }
+    public Message sendMessage(@NonNull Message message) throws DataAccessException {
+        return messageRepository.save(message);
     }
 }

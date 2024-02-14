@@ -74,6 +74,18 @@
     margin-top: 1%;
 }
 
+.no-news-message {
+    text-align: center;
+    margin: auto;
+    padding: 1%;
+    max-width: 40%;
+    min-width: 768px;
+    color: #333;
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 1%;
+}
+
 input {
     padding: 1%;
     font-size: 1rem;
