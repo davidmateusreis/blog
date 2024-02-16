@@ -14,20 +14,21 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "messages")
 public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long messageId;
+    private Long id;
     @NotBlank(message = "This field may not be blank")
     @Size(min = 4, message = "Name must be at least 4 characters")
-    private String messageAuthor;
+    private String author;
     @Email(message = "Invalid email format")
     @NotBlank(message = "This field may not be blank")
-    private String messageEmail;
+    private String email;
     @NotBlank(message = "This field may not be blank")
     @Size(min = 4, message = "Message must be at least 4 characters")
-    private String messageContent;
+    private String content;
     @CreationTimestamp
-    private Instant messageCreatedAt;
+    private Instant createdAt;
 }
