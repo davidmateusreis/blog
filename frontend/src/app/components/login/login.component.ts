@@ -54,10 +54,14 @@ export class LoginComponent implements OnInit {
 
   onCloseModal() {
     const userRoles = this.authService.getUserRoles();
+    const userStatus = this.authService.getUserStatus();
 
-    if (userRoles.includes('Admin')) {
+    if (!userStatus) {
+      this.loginForm.reset();
+      this.showModal = false;
+    } else if (userRoles.includes('ROLE_ADMIN')) {
       this.router.navigate(['/admin']);
-    } else if (userRoles.includes('User')) {
+    } else if (userRoles.includes('ROLE_USER')) {
       this.router.navigate(['/user']);
     } else {
       this.loginForm.reset();

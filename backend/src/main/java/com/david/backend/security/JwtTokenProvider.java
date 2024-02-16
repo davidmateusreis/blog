@@ -5,14 +5,11 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
-import java.util.Collection;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenProvider {
@@ -27,18 +24,12 @@ public class JwtTokenProvider {
 
         String username = authentication.getName();
 
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        String roles = authorities.stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
-
         Date currentDate = new Date();
 
         Date expireDate = new Date(currentDate.getTime() + jwtExpirationDate);
 
         String token = Jwts.builder()
                 .subject(username)
-                .claim("roles", roles)
                 .issuedAt(new Date())
                 .expiration(expireDate)
                 .signWith(key())

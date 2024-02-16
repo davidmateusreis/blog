@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,6 @@ import com.david.backend.entity.User;
 import com.david.backend.exception.ErrorResponse;
 import com.david.backend.service.UserService;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,11 +30,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @PostConstruct
-    public void initRolesAndUsers() {
-        userService.initRolesAndUser();
-    }
 
     @CrossOrigin(origins = { "http://localhost:4200" })
     @PostMapping("/users/register")
@@ -51,6 +46,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" })
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -58,9 +54,18 @@ public class UserController {
     }
 
     @CrossOrigin(origins = { "http://localhost:4200" })
-    @PutMapping("/users/{username}/status")
-    public ResponseEntity<User> updateUserStatus(@PathVariable @NonNull String username) {
-        User updatedUser = userService.updateUserStatus(username);
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/users/me")
+    public ResponseEntity<User> getCurrentUser() {
+        User currentUser = userService.getCurrentUser();
+        return new ResponseEntity<>(currentUser, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = { "http://localhost:4200" })
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/users/{id}/status")
+    public ResponseEntity<User> updateUserStatus(@PathVariable @NonNull Long id) {
+        User updatedUser = userService.updateUserStatus(id);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
     }
 }

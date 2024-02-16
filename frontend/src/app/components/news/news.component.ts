@@ -125,6 +125,5 @@ export class NewsComponent implements OnInit {
 
   showErrorMessage(): void {
     this.apiError = true;
-
   }
 }
