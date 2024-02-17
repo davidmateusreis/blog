@@ -137,13 +137,13 @@ public class NewsService {
             newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
         }
 
-        if (page >= 0 && page < newsPage.getTotalPages()) {
+        if (page >= 0 && page < (newsPage.getTotalPages() == 0 ? 1 : newsPage.getTotalPages())) {
             return new NewsPageDto(
                     newsPage.getContent(),
                     newsPage.getTotalElements(),
                     newsPage.getTotalPages());
         } else {
-            throw new InvalidPageNumberException("The page number you requested not exists");
+            throw new InvalidPageNumberException("The page number you requested does not exist");
         }
     }
 
