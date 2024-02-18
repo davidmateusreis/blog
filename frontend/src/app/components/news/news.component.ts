@@ -51,7 +51,7 @@ export class NewsComponent implements OnInit {
 
     if (this.searchQuery.trim() !== '') {
 
-      this.newsService.getNews(0, this.size, this.searchQuery)
+      this.newsService.getNews(this.currentPage, this.size, this.searchQuery)
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
@@ -114,13 +114,13 @@ export class NewsComponent implements OnInit {
   }
 
   performSearch() {
+    this.currentPage = 0;
     this.loadNews();
   }
 
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
     this.loadNews();
-    this.router.navigate(['/page', newPage + 1]);
   }
 
   showErrorMessage(): void {
