@@ -50,7 +50,7 @@ export class ContactComponent implements OnInit {
           this.showModal = true;
         },
         error => {
-          this.modalMessage = 'Error sending your message!';
+          this.modalMessage = error.error.message || 'Your server is down, try again later.';
           this.showModal = true;
         }
       ).add(() => {
