@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsPage } from 'src/app/models/news-page.model';
 import { News } from 'src/app/models/news.model';
@@ -21,8 +21,6 @@ export class NewsComponent implements OnInit {
   loading: boolean = false;
   apiError: boolean = false;
 
-  @Output() searchEvent = new EventEmitter<string>();
-
   private searchSubject = new Subject<void>();
 
   constructor(
@@ -38,7 +36,7 @@ export class NewsComponent implements OnInit {
     });
 
     this.searchSubject.pipe(debounceTime(300)).subscribe(() => {
-      this.performSearch();
+      this.performSearch(this.searchQuery);
     });
   }
 
@@ -78,6 +76,21 @@ export class NewsComponent implements OnInit {
     }
   }
 
+  performSearch(query: string): void {
+    this.searchQuery = query;
+    this.currentPage = 0;
+    this.loadNews();
+  }
+
+  onPageChange(newPage: number): void {
+    this.currentPage = newPage;
+    this.loadNews();
+  }
+
+  showErrorMessage(): void {
+    this.apiError = true;
+  }
+
   showNewsDetails(news: News) {
     const pubDate = new Date(news.pubDate);
     const year = pubDate.getFullYear();
@@ -111,19 +124,5 @@ export class NewsComponent implements OnInit {
       default:
         return '';
     }
-  }
-
-  performSearch() {
-    this.currentPage = 0;
-    this.loadNews();
-  }
-
-  onPageChange(newPage: number): void {
-    this.currentPage = newPage;
-    this.loadNews();
-  }
-
-  showErrorMessage(): void {
-    this.apiError = true;
   }
 }
