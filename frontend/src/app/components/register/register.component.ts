@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
           this.showModal = true;
         },
         (error) => {
-          this.modalMessage = error.error.message;
+          this.modalMessage = error.error.message || 'Your server is down, try again later.';
           this.showModal = true;
           this.registerForm.reset();
         }

@@ -36,10 +36,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
-        String token = authService.login(jwtAuthRequest);
-
-        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
-        jwtAuthResponse.setAccessToken(token);
+        JwtAuthResponse jwtAuthResponse = authService.login(jwtAuthRequest);
 
         return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
     }

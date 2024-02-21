@@ -27,9 +27,9 @@ export class ContactComponent implements OnInit {
     private router: Router
   ) {
     this.contactForm = this.formBuilder.group({
-      messageAuthor: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      messageEmail: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(40)]],
-      messageContent: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(2000)]]
+      author: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(40)]],
+      content: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(2000)]]
     });
   }
 
@@ -50,7 +50,7 @@ export class ContactComponent implements OnInit {
           this.showModal = true;
         },
         error => {
-          this.modalMessage = 'Error sending your message!';
+          this.modalMessage = error.error.message || 'Your server is down, try again later.';
           this.showModal = true;
         }
       ).add(() => {

@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'privacy', component: PrivacyComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_ADMIN'] } },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_USER'] } },
   { path: '**', redirectTo: '/news' }
 ];
 

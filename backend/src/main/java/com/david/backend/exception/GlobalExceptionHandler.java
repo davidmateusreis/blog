@@ -50,4 +50,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorResponse invalidPasswordResponse = new ErrorResponse(e.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(invalidPasswordResponse);
     }
+
+    @ExceptionHandler(RoleNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleRoleNotFoundException(RoleNotFoundException e) {
+        ErrorResponse roleNotFoundResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(roleNotFoundResponse);
+    }
+
+    @ExceptionHandler(NewsFetchAndSaveException.class)
+    public ResponseEntity<ErrorResponse> handleNewsFetchAndSaveException(NewsFetchAndSaveException e) {
+        ErrorResponse newsFetchAndSaveExceptionResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(newsFetchAndSaveExceptionResponse);
+    }
+
+    @ExceptionHandler(NewsUpdateException.class)
+    public ResponseEntity<ErrorResponse> handleNewsUpdateException(NewsUpdateException e) {
+        ErrorResponse newsUpdateExceptionResponse = new ErrorResponse(e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(newsUpdateExceptionResponse);
+    }
 }

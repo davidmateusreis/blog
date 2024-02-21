@@ -14,7 +14,7 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
                     <td>
-                        <input type="checkbox" [(ngModel)]="user.active" (change)="updateUserStatus(user.username)">
+                        <input type="checkbox" [(ngModel)]="user.active" (change)="updateUserStatus(user.id)">
                     </td>
                 </tr>
             </tbody>

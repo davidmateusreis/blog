@@ -1,3 +1,7 @@
-<div class="user-container">
-    <h2>This is only for User!</h2>
+<div class="user-container" *ngIf="currentUser">
+    <h2>Welcome, {{ currentUser.name }}!</h2>
+</div>
+<app-loader [loading]="loading"></app-loader>
+<div *ngIf="apiError" class="no-user-message">
+    Unable to load user data. Please try again later.
 </div>

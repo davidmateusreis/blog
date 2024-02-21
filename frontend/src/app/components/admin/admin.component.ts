@@ -36,9 +36,10 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  updateUserStatus(username: string): void {
-    this.userService.updateUserStatus(username).subscribe(
-      (updatedUser: User) => {
+  updateUserStatus(id: number): void {
+    this.userService.updateUserStatus(id).subscribe(
+      (user: User) => {
+        console.log('User status successfully updated!', user);
       },
       (error) => {
         console.error('Error toggling user status:', error);

@@ -22,11 +22,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         private UserRepository userRepository;
 
+        public Set<String> getUserRoles(String username) {
+                return userRepository.findByUsername(username)
+                                .map(user -> user.getRole().stream().map(role -> role.getName())
+                                                .collect(Collectors.toSet()))
+                                .orElseThrow(() -> new UsernameNotExistsException("Your username does not exist!"));
+        }
+
         @Override
         public UserDetails loadUserByUsername(String username) {
 
                 User user = userRepository.findByUsername(username)
-                                .orElseThrow(() -> new UsernameNotExistsException("Your username not exists!"));
+                                .orElseThrow(() -> new UsernameNotExistsException("Your username does not exist!"));
 
                 if (!user.isActive()) {
                         throw new UserNotActiveException("Your username is inactive!");

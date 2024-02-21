@@ -3,7 +3,9 @@ package com.david.backend.service;
 import com.david.backend.dto.NewsPageDto;
 import com.david.backend.entity.News;
 import com.david.backend.exception.InvalidPageNumberException;
+import com.david.backend.exception.NewsFetchAndSaveException;
 import com.david.backend.exception.NewsNotFoundException;
+import com.david.backend.exception.NewsUpdateException;
 import com.david.backend.repository.NewsRepository;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -102,7 +104,7 @@ public class NewsService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error fetching and saving news from RSS: " + rssFeedUrl);
+            throw new NewsFetchAndSaveException("Error fetching and saving news from RSS: " + rssFeedUrl);
         }
     }
 
@@ -120,7 +122,7 @@ public class NewsService {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error updating news from RSS feeds");
+            throw new NewsUpdateException("Error updating news from RSS feeds");
         }
     }
 
@@ -137,13 +139,13 @@ public class NewsService {
             newsPage = newsRepository.findAll(PageRequest.of(page, size, Sort.by("pubDate").descending()));
         }
 
-        if (page >= 0 && page < newsPage.getTotalPages()) {
+        if (page >= 0 && page < (newsPage.getTotalPages() == 0 ? 1 : newsPage.getTotalPages())) {
             return new NewsPageDto(
                     newsPage.getContent(),
                     newsPage.getTotalElements(),
                     newsPage.getTotalPages());
         } else {
-            throw new InvalidPageNumberException("The page number you requested not exists");
+            throw new InvalidPageNumberException("The page number you requested does not exist");
         }
     }
 

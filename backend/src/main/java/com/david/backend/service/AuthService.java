@@ -10,7 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.david.backend.dto.JwtAuthRequest;
+import com.david.backend.dto.JwtAuthResponse;
 import com.david.backend.exception.InvalidPasswordException;
+import com.david.backend.exception.UsernameNotExistsException;
+import com.david.backend.repository.UserRepository;
 import com.david.backend.security.JwtTokenProvider;
 
 @Service
@@ -25,7 +28,9 @@ public class AuthService {
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public String login(JwtAuthRequest jwtAuthRequest) {
+    private UserRepository userRepository;
+
+    public JwtAuthResponse login(JwtAuthRequest jwtAuthRequest) {
 
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(jwtAuthRequest.getUsername());
 
@@ -41,6 +46,13 @@ public class AuthService {
 
         String token = jwtTokenProvider.generateToken(authentication);
 
-        return token;
+        JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
+        jwtAuthResponse.setAccessToken(token);
+        jwtAuthResponse.setTokenType("Bearer");
+        jwtAuthResponse.setRoles(customUserDetailsService.getUserRoles(jwtAuthRequest.getUsername()));
+        jwtAuthResponse.setActive(userRepository.findByUsername(jwtAuthRequest.getUsername())
+                .orElseThrow(() -> new UsernameNotExistsException("User not found!")).isActive());
+
+        return jwtAuthResponse;
     }
 }

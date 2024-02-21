@@ -13,3 +13,15 @@ h2 {
     padding: 0.4%;
     text-align: center;
 }
+
+.no-user-message {
+    text-align: center;
+    margin: auto;
+    padding: 1%;
+    max-width: 40%;
+    min-width: 768px;
+    color: #333;
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 1%;
+}
