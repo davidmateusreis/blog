@@ -3,7 +3,9 @@ package com.david.backend.service;
 import com.david.backend.dto.NewsPageDto;
 import com.david.backend.entity.News;
 import com.david.backend.exception.InvalidPageNumberException;
+import com.david.backend.exception.NewsFetchAndSaveException;
 import com.david.backend.exception.NewsNotFoundException;
+import com.david.backend.exception.NewsUpdateException;
 import com.david.backend.repository.NewsRepository;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -102,7 +104,7 @@ public class NewsService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error fetching and saving news from RSS: " + rssFeedUrl);
+            throw new NewsFetchAndSaveException("Error fetching and saving news from RSS: " + rssFeedUrl);
         }
     }
 
@@ -120,7 +122,7 @@ public class NewsService {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error updating news from RSS feeds");
+            throw new NewsUpdateException("Error updating news from RSS feeds");
         }
     }
 
