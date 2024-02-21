@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NewsPage } from 'src/app/models/news-page.model';
 import { News } from 'src/app/models/news.model';
 import { NewsService } from 'src/app/services/news.service';
-import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -33,10 +32,6 @@ export class NewsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.currentPage = +params['pageNumber'] - 1 || 0;
       this.loadNews();
-    });
-
-    this.searchSubject.pipe(debounceTime(300)).subscribe(() => {
-      this.performSearch(this.searchQuery);
     });
   }
 
