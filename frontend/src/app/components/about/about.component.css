@@ -1,12 +1,17 @@
+.container {
+    width: 100%;
+    margin: auto;
+}
+
 .about-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 40%;
     margin: auto;
     padding: 1%;
-    max-width: 40%;
-    min-width: 768px;
+    margin-bottom: 2%;
 }
 
 .social-container {
@@ -14,15 +19,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    box-sizing: border-box;
+    width: 40%;
+    margin: auto;
     padding: 1%;
-    min-width: 768px;
     gap: 1%;
 }
 
 .social-container svg {
-    width: 24px;
+    width: 30px;
     color: #333;
     transition: all 0.4s;
 }
@@ -32,12 +36,14 @@
 }
 
 h2 {
+    margin-bottom: 2%;
     padding: 0.4%;
     text-align: center;
     white-space: nowrap;
 }
 
 p {
+    padding: 0.4%;
     text-align: center;
     line-height: 1.4;
 }
@@ -46,4 +52,15 @@ img {
     margin: 2%;
     width: 200px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 993px) {
+
+    .about-container {
+        width: 90%;
+    }
+
+    .social-container {
+        width: 90%;
+    }
 }

@@ -1,26 +1,32 @@
+.container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
 .admin-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
     margin: auto;
     padding: 1%;
-    max-width: 40%;
-    min-width: 768px;
 }
 
 h2 {
     padding: 0.4%;
     text-align: center;
+    white-space: nowrap;
 }
 
 .table-container {
     width: 100%;
-    padding: 2%;
 }
 
 table {
-    width: 100%;
+    width: 40%;
+    margin: auto;
     border-collapse: collapse;
 }
 
@@ -44,8 +50,6 @@ tr:hover {
     text-align: center;
     margin: auto;
     padding: 1%;
-    max-width: 40%;
-    min-width: 768px;
     color: #333;
     font-size: x-large;
     font-weight: bold;
@@ -66,4 +70,13 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:checked {
     background-color: #d80108;
+}
+
+@media (max-width: 993px) {
+
+    table {
+        width: 90%;
+        margin: auto;
+        border-collapse: collapse;
+    }
 }

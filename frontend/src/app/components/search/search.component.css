@@ -1,23 +1,34 @@
+.container {
+    width: 100%;
+    margin: auto;
+}
+
 .search-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 80%;
     margin: auto;
     padding: 1%;
-    max-width: 80%;
-    min-width: 768px;
 }
 
 input {
     padding: 1%;
+    width: 60%;
+    height: 48px;
     font-size: 1rem;
-    margin-right: 8px;
-    width: 600px;
     background-color: #f0f0f0;
     border: none;
 }
 
 input:focus {
     outline: none !important;
+}
+
+@media (max-width: 993px) {
+
+    input {
+        width: 100%;
+    }
 }

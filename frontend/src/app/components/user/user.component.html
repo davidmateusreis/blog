@@ -1,7 +1,9 @@
-<div class="user-container" *ngIf="currentUser">
-    <h2>Welcome, {{ currentUser.name }}!</h2>
-</div>
-<app-loader [loading]="loading"></app-loader>
-<div *ngIf="apiError" class="no-user-message">
-    Unable to load user data. Please try again later.
+<div class="container">
+    <div class="user-container" *ngIf="currentUser">
+        <h2>Welcome, {{ currentUser.name }}!</h2>
+    </div>
+    <app-loader [loading]="loading"></app-loader>
+    <div *ngIf="apiError" class="no-user-message">
+        Unable to load user data. Please try again later.
+    </div>
 </div>

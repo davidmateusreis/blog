@@ -1,20 +1,23 @@
+.container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
 .news-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 80%;
+    height: auto;
     margin: auto;
-    gap: 2%;
-    max-width: 80%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    min-width: 768px;
+    padding: 1%;
 }
 
 .news-item {
     margin-bottom: 1%;
     padding: 1%;
-    width: 486px;
-    max-width: 768px;
+    width: 33%;
 }
 
 .news-image {
@@ -43,20 +46,15 @@
 }
 
 .paginator-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2%;
-    min-width: 768px;
-    padding: 1%;
+    width: 100%;
+    margin: auto;
 }
 
 .no-results-message {
     text-align: center;
     margin: auto;
     padding: 1%;
-    max-width: 40%;
-    min-width: 768px;
+    max-width: 60%;
     color: #333;
     font-size: x-large;
     font-weight: bold;
@@ -67,8 +65,7 @@
     text-align: center;
     margin: auto;
     padding: 1%;
-    max-width: 40%;
-    min-width: 768px;
+    max-width: 60%;
     color: #333;
     font-size: x-large;
     font-weight: bold;
@@ -88,15 +85,23 @@ button:hover {
     background-color: #b80108;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 993px) {
+
+    .container {
+        width: 100%;
+        margin: auto;
+    }
+
     .news-container {
-        max-width: 100%;
-        padding: 2%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 90%;
+        margin: auto;
     }
 
     .news-item {
         width: 100%;
-        padding: 2%;
-        max-width: none;
+        margin: auto;
     }
 }

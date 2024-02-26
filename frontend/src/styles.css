@@ -24,7 +24,7 @@ body.dark-mode a {
     color: #fff;
 }
 
-body.dark-mode .pagination button {
+body.dark-mode .paginator button {
     color: #fff;
     background-color: #444;
 }
@@ -78,4 +78,10 @@ body.dark-mode .no-users-message {
 
 body.dark-mode .no-user-message {
     color: #fff;
+}
+
+@media (max-width: 993px) {
+    body {
+        font-size: 1.3rem;
+    }
 }

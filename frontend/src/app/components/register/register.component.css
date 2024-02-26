@@ -1,25 +1,31 @@
+.container {
+    width: 100%;
+    margin: auto;
+}
+
 .register-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 80%;
     margin: auto;
     padding: 1%;
-    max-width: 80%;
-    min-width: 768px;
 }
 
 h2 {
+    margin-bottom: 2%;
     padding: 0.4%;
     text-align: center;
     white-space: nowrap;
 }
 
 input {
+    margin-bottom: 2%;
     padding: 2%;
-    margin: 1%;
+    width: 100%;
+    height: 48px;
     font-size: 1rem;
-    width: 600px;
     background-color: #f0f0f0;
     border: none;
 }
@@ -29,9 +35,10 @@ input:focus {
 }
 
 button {
+    margin-bottom: 2%;
     padding: 2%;
-    margin: 1%;
-    width: 100%;
+    width: 600px;
+    height: 48px;
     font-size: 1rem;
     cursor: pointer;
     background-color: #d80108;
