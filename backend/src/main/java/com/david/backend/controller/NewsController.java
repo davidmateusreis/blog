@@ -21,7 +21,7 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @GetMapping
     public ResponseEntity<NewsPageDto> getAllNews(
             @RequestParam(defaultValue = "0") int page,
@@ -31,7 +31,7 @@ public class NewsController {
         return new ResponseEntity<>(newsPageDto, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @GetMapping("{slug}")
     public ResponseEntity<News> getNewsDetailsBySlug(@PathVariable String slug) {
         News news = newsService.getNewsDetailsBySlug(slug);

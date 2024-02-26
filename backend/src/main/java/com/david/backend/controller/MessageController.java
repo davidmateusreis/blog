@@ -26,7 +26,7 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @PostMapping
     public ResponseEntity<?> send(@Valid @RequestBody Message message, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

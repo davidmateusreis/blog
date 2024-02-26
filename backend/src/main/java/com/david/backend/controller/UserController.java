@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @PostMapping("/users/register")
     public ResponseEntity<?> registerNewUser(@Valid @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -45,7 +45,7 @@ public class UserController {
         return new ResponseEntity<>(registeredUser, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -53,7 +53,7 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/users/me")
     public ResponseEntity<User> getCurrentUser() {
@@ -61,7 +61,7 @@ public class UserController {
         return new ResponseEntity<>(currentUser, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/users/{id}/status")
     public ResponseEntity<User> updateUserStatus(@PathVariable @NonNull Long id) {

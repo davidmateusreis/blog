@@ -26,7 +26,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @PostMapping
     public ResponseEntity<?> login(@Valid @RequestBody JwtAuthRequest jwtAuthRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
