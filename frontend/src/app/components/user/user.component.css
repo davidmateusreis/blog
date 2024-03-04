@@ -1,15 +1,40 @@
+.container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
 .user-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 40%;
     margin: auto;
     padding: 1%;
-    max-width: 40%;
-    min-width: 768px;
 }
 
 h2 {
     padding: 0.4%;
     text-align: center;
+    white-space: nowrap;
+}
+
+.no-user-message {
+    text-align: center;
+    margin: auto;
+    padding: 1%;
+    max-width: 40%;
+    min-width: 768px;
+    color: #333;
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 1%;
+}
+
+@media (max-width: 993px) {
+
+    .user-container {
+        width: 90%;
+    }
 }

@@ -5,6 +5,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.david.backend.entity.Message;
+import com.david.backend.exception.ContactMessageException;
 import com.david.backend.repository.MessageRepository;
 
 import lombok.NonNull;
@@ -19,8 +20,7 @@ public class MessageService {
         try {
             return messageRepository.save(message);
         } catch (DataAccessException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error saving message to the database");
+            throw new ContactMessageException("Error sending your message!");
         }
     }
 }

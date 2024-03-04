@@ -24,7 +24,7 @@ body.dark-mode a {
     color: #fff;
 }
 
-body.dark-mode .pagination button {
+body.dark-mode .paginator button {
     color: #fff;
     background-color: #444;
 }
@@ -49,4 +49,39 @@ body.dark-mode .no-results-message {
 
 body.dark-mode .modal-container {
     background-color: #333;
+}
+
+body.dark-mode .loader {
+    border: 8px solid #444;
+    border-top: 8px solid #d80108;
+}
+
+body.dark-mode .no-news-message {
+    color: #fff;
+}
+
+body.dark-mode th {
+    background-color: #444;
+}
+
+body.dark-mode tr:hover {
+    background-color: #444;
+}
+
+body.dark-mode input[type="checkbox"] {
+    background-color: #333;
+}
+
+body.dark-mode .no-users-message {
+    color: #fff;
+}
+
+body.dark-mode .no-user-message {
+    color: #fff;
+}
+
+@media (max-width: 993px) {
+    body {
+        font-size: 1.3rem;
+    }
 }

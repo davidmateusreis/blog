@@ -1,12 +1,42 @@
+.container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
 .disqus-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 80%;
+    height: auto;
     margin: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    padding: 20px;
-    width: 100%;
-    min-width: 768px;
-    max-width: 768px;
+    padding: 1%;
+}
+
+.disqus-content {
+    margin: auto;
+    padding: 1%;
+    width: 50%;
+}
+
+@media (max-width: 993px) {
+
+    .container {
+        width: 100%;
+        margin: auto;
+    }
+
+    .disqus-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 90%;
+        margin: auto;
+    }
+
+    .disqus-content {
+        width: 100%;
+        margin: auto;
+    }
 }

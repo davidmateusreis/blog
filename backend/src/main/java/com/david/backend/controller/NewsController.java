@@ -21,33 +21,22 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @GetMapping
-    public ResponseEntity<NewsPageDto> getAllNews(@RequestParam(defaultValue = "0") int page,
+    public ResponseEntity<NewsPageDto> getAllNews(
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "12") int size,
             @RequestParam(required = false) String searchQuery) {
-        try {
-            NewsPageDto newsPageDto = newsService.getAllNews(page, size, searchQuery);
-            return new ResponseEntity<>(newsPageDto, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        NewsPageDto newsPageDto = newsService.getAllNews(page, size, searchQuery);
+        return new ResponseEntity<>(newsPageDto, HttpStatus.OK);
     }
 
-    @CrossOrigin(origins = { "http://localhost:4200" })
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
     @GetMapping("{slug}")
     public ResponseEntity<News> getNewsDetailsBySlug(@PathVariable String slug) {
-        try {
-            News news = newsService.getNewsDetailsBySlug(slug);
-            if (news != null) {
-                return new ResponseEntity<>(news, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        News news = newsService.getNewsDetailsBySlug(slug);
+        return news != null
+                ? new ResponseEntity<>(news, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

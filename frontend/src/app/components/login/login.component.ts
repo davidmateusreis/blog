@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   modalMessage = '';
   showModal = false;
 
+  loading: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.submitted = true;
+      this.loading = true;
 
       const formData = this.loginForm.value;
 
@@ -40,19 +43,25 @@ export class LoginComponent implements OnInit {
           this.showModal = true;
         },
         (error) => {
-          this.modalMessage = 'Your login failed!';
+          this.modalMessage = error.error.message || 'Your server is down, try again later.';
           this.showModal = true;
         }
-      );
+      ).add(() => {
+        this.loading = false;
+      });
     }
   }
 
   onCloseModal() {
     const userRoles = this.authService.getUserRoles();
+    const userStatus = this.authService.getUserStatus();
 
-    if (userRoles.includes('Admin')) {
+    if (!userStatus) {
+      this.loginForm.reset();
+      this.showModal = false;
+    } else if (userRoles.includes('ROLE_ADMIN')) {
       this.router.navigate(['/admin']);
-    } else if (userRoles.includes('User')) {
+    } else if (userRoles.includes('ROLE_USER')) {
       this.router.navigate(['/user']);
     } else {
       this.loginForm.reset();

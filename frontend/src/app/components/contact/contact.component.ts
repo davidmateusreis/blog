@@ -16,15 +16,20 @@ export class ContactComponent implements OnInit {
   contactForm!: FormGroup;
   submitted = false;
 
+  modalMessage = '';
+  showModal = false;
+
+  loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private httpClient: HttpClient,
     private router: Router
   ) {
     this.contactForm = this.formBuilder.group({
-      messageAuthor: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      messageEmail: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(40)]],
-      messageContent: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(2000)]]
+      author: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(40)]],
+      content: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(2000)]]
     });
   }
 
@@ -35,18 +40,26 @@ export class ContactComponent implements OnInit {
     if (this.contactForm.valid) {
 
       this.submitted = true;
+      this.loading = true;
 
       const formData = this.contactForm.value;
 
       this.httpClient.post(`${this.baseUrl + '/contact'}`, formData).subscribe(
         response => {
-          alert('Thanks for your feedback and support!');
-          this.router.navigate(['/']);
+          this.modalMessage = 'Thanks for your feedback and support!';
+          this.showModal = true;
         },
         error => {
-          alert('Error sending message!');
+          this.modalMessage = error.error.message || 'Your server is down, try again later.';
+          this.showModal = true;
         }
-      );
+      ).add(() => {
+        this.loading = false;
+      });
     }
+  }
+
+  onCloseModal() {
+    this.router.navigate(['/']);
   }
 }

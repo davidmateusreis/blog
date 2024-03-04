@@ -1,9 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsPage } from 'src/app/models/news-page.model';
 import { News } from 'src/app/models/news.model';
 import { NewsService } from 'src/app/services/news.service';
-import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -18,7 +17,8 @@ export class NewsComponent implements OnInit {
   size = 12;
   searchQuery: string = '';
 
-  @Output() searchEvent = new EventEmitter<string>();
+  loading: boolean = false;
+  apiError: boolean = false;
 
   private searchSubject = new Subject<void>();
 
@@ -33,10 +33,6 @@ export class NewsComponent implements OnInit {
       this.currentPage = +params['pageNumber'] - 1 || 0;
       this.loadNews();
     });
-
-    this.searchSubject.pipe(debounceTime(300)).subscribe(() => {
-      this.performSearch();
-    });
   }
 
   onSearchInputChange(): void {
@@ -44,15 +40,19 @@ export class NewsComponent implements OnInit {
   }
 
   loadNews(): void {
+    this.loading = true;
+
     if (this.searchQuery.trim() !== '') {
 
-      this.newsService.getNews(0, this.size, this.searchQuery)
+      this.newsService.getNews(this.currentPage, this.size, this.searchQuery)
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
+            this.loading = false;
           },
           error => {
-            console.log('Error loading news:', error);
+            this.loading = false;
+            this.showErrorMessage();
           }
         );
     } else {
@@ -61,12 +61,29 @@ export class NewsComponent implements OnInit {
         .subscribe(
           (response: NewsPage) => {
             this.newsPage = response;
+            this.loading = false;
           },
           error => {
-            console.log('Error loading news:', error);
+            this.loading = false;
+            this.showErrorMessage();
           }
         );
     }
+  }
+
+  performSearch(query: string): void {
+    this.searchQuery = query;
+    this.currentPage = 0;
+    this.loadNews();
+  }
+
+  onPageChange(newPage: number): void {
+    this.currentPage = newPage;
+    this.loadNews();
+  }
+
+  showErrorMessage(): void {
+    this.apiError = true;
   }
 
   showNewsDetails(news: News) {
@@ -102,15 +119,5 @@ export class NewsComponent implements OnInit {
       default:
         return '';
     }
-  }
-
-  performSearch() {
-    this.loadNews();
-  }
-
-  onPageChange(newPage: number): void {
-    this.currentPage = newPage;
-    this.loadNews();
-    this.router.navigate(['/page', newPage + 1]);
   }
 }

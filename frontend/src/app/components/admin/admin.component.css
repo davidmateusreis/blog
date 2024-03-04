@@ -1,15 +1,82 @@
+.container {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
 .admin-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
     margin: auto;
     padding: 1%;
-    max-width: 40%;
-    min-width: 768px;
 }
 
 h2 {
     padding: 0.4%;
     text-align: center;
+    white-space: nowrap;
+}
+
+.table-container {
+    width: 100%;
+}
+
+table {
+    width: 40%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+}
+
+.no-users-message {
+    text-align: center;
+    margin: auto;
+    padding: 1%;
+    color: #333;
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 1%;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 4px;
+    width: 18px;
+    height: 18px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #d80108;
+}
+
+@media (max-width: 993px) {
+
+    table {
+        width: 90%;
+        margin: auto;
+        border-collapse: collapse;
+    }
 }

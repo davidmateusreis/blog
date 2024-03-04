@@ -1,3 +1,29 @@
-<div class="admin-container">
-    <h2>This is only for Admin!</h2>
+<div class="container">
+    <div class="admin-container">
+        <h2>Manage user accounts</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <input type="checkbox" [(ngModel)]="user.active" (change)="updateUserStatus(user.id)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <app-loader [loading]="loading"></app-loader>
+    <div *ngIf="apiError" class="no-users-message">
+        Unable to load user data. Please try again later.
+    </div>
 </div>

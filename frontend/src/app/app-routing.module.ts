@@ -14,18 +14,19 @@ import { AdminComponent } from './components/admin/admin.component';
 import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
-  { path: '', component: NewsComponent },
+  { path: '', redirectTo: '/news', pathMatch: 'full' },
+  { path: 'news', component: NewsComponent },
+  { path: 'news/page/:pageNumber', component: NewsComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
   { path: 'news/:year/:month/:slug', component: NewsDetailsComponent },
   { path: 'terms', component: TermsComponent },
   { path: 'privacy', component: PrivacyComponent },
-  { path: 'page/:pageNumber', component: NewsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
-  { path: '**', redirectTo: '/page/1' }
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_ADMIN'] } },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_USER'] } },
+  { path: '**', redirectTo: '/news' }
 ];
 
 @NgModule({

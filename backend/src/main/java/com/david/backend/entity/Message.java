@@ -4,30 +4,31 @@ import java.time.Instant;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "messages")
 public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long messageId;
+    private Long id;
     @NotBlank(message = "This field may not be blank")
-    private String messageAuthor;
-    @Email
+    @Size(min = 4, message = "Name must be at least 4 characters")
+    private String author;
+    @Email(message = "Invalid email format")
     @NotBlank(message = "This field may not be blank")
-    private String messageEmail;
+    private String email;
     @NotBlank(message = "This field may not be blank")
-    private String messageContent;
+    @Size(min = 4, message = "Message must be at least 4 characters")
+    private String content;
     @CreationTimestamp
-    private Instant messageCreatedAt;
+    private Instant createdAt;
 }

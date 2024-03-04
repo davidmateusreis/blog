@@ -15,11 +15,11 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) { }
 
-  toggleDarkMode(): void {
-    this.darkModeService.toggleDarkMode();
+  ngOnInit(): void {
   }
 
-  ngOnInit(): void {
+  toggleDarkMode(): void {
+    this.darkModeService.toggleDarkMode();
   }
 
   isLoggedIn(): boolean {
@@ -28,16 +28,16 @@ export class HeaderComponent implements OnInit {
 
   hasAdminRole(): boolean {
     const userRoles = this.authService.getUserRoles();
-    return userRoles.includes('Admin');
+    return userRoles.includes('ROLE_ADMIN');
   }
 
   hasUserRole(): boolean {
     const userRoles = this.authService.getUserRoles();
-    return userRoles.includes('User');
+    return userRoles.includes('ROLE_USER');
   }
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 }

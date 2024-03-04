@@ -13,6 +13,11 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   submitted = false;
 
+  modalMessage = '';
+  showModal = false;
+
+  loading: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router
@@ -30,19 +35,27 @@ export class RegisterComponent implements OnInit {
   registerNewUser() {
     if (this.registerForm.valid) {
       this.submitted = true;
+      this.loading = true;
 
       const formData = this.registerForm.value;
 
       this.userService.registerNewUser(formData).subscribe(
         (response) => {
-          alert('Your account has been created successfully!');
-          this.router.navigate(['/login']);
+          this.modalMessage = 'Your account has been created successfully!';
+          this.showModal = true;
         },
         (error) => {
-          alert('Error creating a new account!');
+          this.modalMessage = error.error.message || 'Your server is down, try again later.';
+          this.showModal = true;
           this.registerForm.reset();
         }
-      );
+      ).add(() => {
+        this.loading = false;
+      });
     }
+  }
+
+  onCloseModal() {
+    this.router.navigate(['/login']);
   }
 }
