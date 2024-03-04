@@ -1,27 +1,44 @@
-.pagination {
+.paginator {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    margin: auto;
     gap: 6px;
+    padding: 1%;
+    margin-top: 2%;
 }
 
-.pagination button {
+button {
     height: 42px;
     padding: 0 10px;
     cursor: pointer;
     border: none;
     font-size: medium;
+    color: #333;
 }
 
-.pagination button.active {
+.paginator button:disabled {
+    cursor: not-allowed;
+    color: #888;
+}
+
+.paginator button.active {
     background-color: #d80108;
     color: #fff;
 }
 
-.pagination button.active:hover {
+.paginator button.active:hover {
     background-color: #b80108;
 }
 
-.pagination button:not(.active):hover {
-    filter: contrast(0.8)
+.paginator button:not(.active):hover {
+    filter: contrast(0.8);
+}
+
+@media (max-width: 993px) {
+
+    .paginator {
+        margin-top: 8%;
+    }
 }

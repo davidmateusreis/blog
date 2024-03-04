@@ -1,26 +1,33 @@
+.container {
+    width: 100%;
+    margin: auto;
+}
+
 .privacy-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 40%;
     margin: auto;
     padding: 1%;
-    max-width: 40%;
-    min-width: 768px;
-}
-
-h1 {
-    padding: 0.4%;
-    text-align: center;
 }
 
 h2 {
     padding: 0.4%;
     text-align: center;
+    white-space: nowrap;
 }
 
 p {
     padding: 0.4%;
     text-align: center;
     line-height: 1.4;
+}
+
+@media (max-width: 993px) {
+
+    .privacy-container {
+        width: 90%;
+    }
 }

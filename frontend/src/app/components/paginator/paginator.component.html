@@ -1,7 +1,9 @@
-<div class="pagination">
-    <button (click)="onPrevious()" [disabled]="currentPage === 0">Previous</button>
-    <div *ngFor="let page of getPageNumbers()">
-        <button (click)="onPageChange(page - 1)" [class.active]="currentPage === (page - 1)">{{ page }}</button>
+<div class="paginator-container">
+    <div class="paginator">
+        <button (click)="onPrevious()" [disabled]="currentPage === 0">Previous</button>
+        <div *ngFor="let page of getPageNumbers()">
+            <button (click)="onPageChange(page - 1)" [class.active]="currentPage === (page - 1)">{{ page }}</button>
+        </div>
+        <button (click)="onNext()" [disabled]="currentPage === (totalPages - 1)">Next</button>
     </div>
-    <button (click)="onNext()" [disabled]="currentPage === (totalPages - 1)">Next</button>
 </div>
