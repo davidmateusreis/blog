@@ -34,6 +34,10 @@ public class AuthService {
 
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(jwtAuthRequest.getUsername());
 
+        if (userDetails == null) {
+            throw new UsernameNotExistsException("User not found!");
+        }
+
         if (!bCryptPasswordEncoder.matches(jwtAuthRequest.getPassword(), userDetails.getPassword())) {
             throw new InvalidPasswordException("Your password may be wrong!");
         }
