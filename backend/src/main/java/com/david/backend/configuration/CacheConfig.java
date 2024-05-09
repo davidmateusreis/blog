@@ -14,7 +14,6 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 public class CacheConfig {
 
     @Bean
-    @SuppressWarnings("null")
     CaffeineCacheManager caffeineCacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
 
