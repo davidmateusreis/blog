@@ -29,7 +29,6 @@ export class UserComponent implements OnInit {
         this.loading = false;
       },
       (error) => {
-        console.error('Error fetching current user:', error);
         this.loading = false;
         this.showErrorMessage();
       }

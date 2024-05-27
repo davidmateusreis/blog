@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
 
       this.userService.registerNewUser(formData).subscribe(
         (response) => {
-          this.modalMessage = 'Your account has been created successfully!';
+          this.modalMessage = 'Your account has been created successfully! Please, verify your email to activate it!';
           this.showModal = true;
         },
         (error) => {

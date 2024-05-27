@@ -25,6 +25,7 @@ import { UserComponent } from './components/user/user.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SearchComponent } from './components/search/search.component';
+import { ActivateComponent } from './components/activate/activate.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -50,7 +51,8 @@ export function tokenGetter() {
     UserComponent,
     ModalComponent,
     LoaderComponent,
-    SearchComponent
+    SearchComponent,
+    ActivateComponent
   ],
   imports: [
     BrowserModule,
