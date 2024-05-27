@@ -2,23 +2,32 @@ package com.david.backend.service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.david.backend.entity.Role;
 import com.david.backend.entity.User;
+import com.david.backend.entity.VerificationToken;
 import com.david.backend.exception.RoleNotFoundException;
 import com.david.backend.exception.UsernameAlreadyExistsException;
 import com.david.backend.exception.UsernameNotExistsException;
 import com.david.backend.repository.RoleRepository;
 import com.david.backend.repository.UserRepository;
+import com.david.backend.repository.VerificationTokenRepository;
 
 @Service
 public class UserService {
+
+    @Value("${app.frontend.base-url}")
+    private String baseUrl;
 
     @NonNull
     private static final Long DEFAULT_ROLE = 2L;
@@ -31,6 +40,12 @@ public class UserService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @Autowired
+    private VerificationTokenRepository verificationTokenRepository;
 
     public User registerNewUser(User user) {
 
@@ -72,5 +87,41 @@ public class UserService {
 
     public String getEncodedPassword(String password) {
         return bCryptPasswordEncoder.encode(password);
+    }
+
+    public void sendVerificationEmail(User user, String token) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("${spring.mail.username}");
+        message.setTo(user.getEmail());
+        message.setSubject("Action Required: Verify Your Email Address");
+        message.setText(
+                "Please, verify your email address by clicking this link: " + baseUrl + "/activate?token="
+                        + token);
+        javaMailSender.send(message);
+    }
+
+    public String generateVerificationToken(User user) {
+
+        String token = UUID.randomUUID().toString();
+
+        VerificationToken verificationToken = new VerificationToken();
+        verificationToken.setToken(token);
+        verificationToken.setUser(user);
+        verificationTokenRepository.save(verificationToken);
+        return token;
+    }
+
+    public boolean activateAccount(String token) {
+
+        VerificationToken verificationToken = verificationTokenRepository.findByToken(token);
+        if (verificationToken != null) {
+            User user = verificationToken.getUser();
+            user.setActive(true);
+            userRepository.save(user);
+            verificationTokenRepository.delete(verificationToken);
+            return true;
+        }
+        return false;
     }
 }

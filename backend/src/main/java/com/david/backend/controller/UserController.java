@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.david.backend.entity.User;
@@ -42,6 +43,11 @@ public class UserController {
         }
 
         User registeredUser = userService.registerNewUser(user);
+
+        String verificationToken = userService.generateVerificationToken(registeredUser);
+
+        userService.sendVerificationEmail(registeredUser, verificationToken);
+
         return new ResponseEntity<>(registeredUser, HttpStatus.OK);
     }
 
@@ -67,5 +73,16 @@ public class UserController {
     public ResponseEntity<User> updateUserStatus(@PathVariable @NonNull Long id) {
         User updatedUser = userService.updateUserStatus(id);
         return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins = { "${app.cors.allowed-origins}" })
+    @GetMapping("/activate")
+    public ResponseEntity<String> activateAccount(@RequestParam("token") String token) {
+        boolean isActivated = userService.activateAccount(token);
+        if (isActivated) {
+            return ResponseEntity.ok("Your account activated successfully!");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid or expired token.");
+        }
     }
 }
