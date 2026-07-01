@@ -29,4 +29,11 @@ export class NewsService {
   public getNewsDetailsBySlug(slug: string) {
     return this.httpClient.get<News>(`${this.baseUrl}/news/${slug}`);
   }
+
+  public getImageUrl(imageUrl: string): string {
+    if (!imageUrl) {
+      return '';
+    }
+    return `${this.baseUrl}/images/proxy?url=${encodeURIComponent(imageUrl)}`;
+  }
 }

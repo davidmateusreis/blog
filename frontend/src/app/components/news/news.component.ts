@@ -120,4 +120,9 @@ export class NewsComponent implements OnInit {
         return '';
     }
   }
+
+  getImageUrl(imageUrl: string): string {
+    return this.newsService.getImageUrl(imageUrl);
+  }
+
 }

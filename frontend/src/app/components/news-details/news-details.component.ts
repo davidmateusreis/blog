@@ -94,4 +94,8 @@ export class NewsDetailsComponent implements OnInit {
   getWhatsAppShareLink(newsDetails: News): string {
     return `https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out this news: ${newsDetails.title} ${newsDetails.link}`)}`;
   }
+
+  getImageUrl(imageUrl: string): string {
+    return this.newsService.getImageUrl(imageUrl);
+  }
 }
